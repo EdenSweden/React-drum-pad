@@ -23,41 +23,6 @@ body{
 }
 
 
-
-#button-container {
-  background-color: darkGray;
-  position: relative;
-  top: 55px;
-  left: 50px;
-  width: 280px;
-  height: 280px;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  padding: 5px;
-  border-radius: 15px;
-}
-
-
-
-.drum-pad {
-  border-radius: 15px;
-  font-size: 28px;
-  background-color: gray;
-  font-family: Courier New;
-  font-weight: bold;
-  cursor: pointer;
-}
-.drum-pad:hover{
-  background-color: #00e600;
-}
-
-
-
-/*#power{
-  padding: 15px;
-}*/
 #power-button{
   border-radius: 50%;
   border: 2px solid black;

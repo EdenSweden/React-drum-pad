@@ -1,6 +1,7 @@
 
 import './App.css';
 import React, { useState } from 'react';
+import './Machine.js';
 
 /*class App extends React.Component {
   constructor(props) {
@@ -20,8 +21,8 @@ import React, { useState } from 'react';
 function App() {
   return (
     <div className="App">
-      const [power, setPower] = useState(true);
-      const [display, setDisplay] = useState("");
+      {/*const [power, setPower] = useState(true);
+      const [display, setDisplay] = useState("");*/}
       <Machine /> 
     </div>
   );
