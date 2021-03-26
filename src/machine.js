@@ -1,5 +1,5 @@
-import React;
-import './machine.css';
+import React from 'react';
+import './Machine.css';
 
 function Machine() {
   return (
