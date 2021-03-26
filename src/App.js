@@ -1,22 +1,28 @@
 
 import './App.css';
+import React, { useState } from 'react';
+
+/*class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      power: true,
+      display: "",
+      sound: "quiet"
+    };
+  }
+
+  render() {
+    return <Machine />;
+  }
+}*/
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      const [power, setPower] = useState(true);
+      const [display, setDisplay] = useState("");
+      <Machine /> 
     </div>
   );
 }

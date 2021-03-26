@@ -1,0 +1,13 @@
+#drum-machine{
+    background-color: black;
+    height: 400px;
+    width: 740px;
+    margin: 0 auto;
+    position: relative;
+    top: 4em;
+    bottom: 4em;
+    border: 6px solid #00e600;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+  }
