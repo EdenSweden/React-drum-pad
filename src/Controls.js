@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Controls.css';
-//convert the following to a functional component with hooks:
-/*class Controls extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        bank: "kit1"
-      };
-      this.handleSwitch = this.handleSwitch.bind(this);
+//converted the following from a class component to a functional component with hooks:
+function Controls () {
+    
+    const [bank, setBank] = useState("kit1");
+    
+  //MAKE SURE THE SYNTAX FOR THE BELOW FUNCTION IS CORRECT
+    function handleSwitch() {
+
+      setBank[bank === "kit1" ? "kit2" : "kit1"]
+        
+      /*if(bank === "kit1"){
+        setBank("kit2");
+      }
+      else if(bank === "kit2") {
+          setBank("kit1");
+      }*/
     }
   
-    handleSwitch() {
-      this.setState({ bank: "kit2" });
-    }
-  
-    render() {
       return (
         <div id="controls">
           <Power />
           <Volume />
           <Display />
-          <Bank switchKit={this.handleSwitch} />
+          <Bank switchKit={handleSwitch} />
         </div>
       );
-    }
-  }*/
+  }
+  
+  export default Controls;

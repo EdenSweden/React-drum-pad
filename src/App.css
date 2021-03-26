@@ -53,20 +53,7 @@ body{
   background-color: #00e600;
 }
 
-#controls{
-  height: 260px;
-  width: 280px;
-  background-color: darkGray;
-  position: relative;
-  top: 55px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-gap: 7px;
-  font-weight: bold;
-  text-align: center;
-  padding: 15px;
-}
+
 
 /*#power{
   padding: 15px;
