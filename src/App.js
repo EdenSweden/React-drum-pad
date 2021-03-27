@@ -1,7 +1,7 @@
 
 import './App.css';
 import React, { useState } from 'react';
-import './Machine.js';
+import Machine from './Machine.js';
 
 /*class App extends React.Component {
   constructor(props) {

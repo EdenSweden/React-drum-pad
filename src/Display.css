@@ -1,0 +1,9 @@
+#display {
+    background-color: gray;
+    border: 2px solid black;
+    display: inline-block;
+    width: 70%;
+    height: min-content;
+    margin: 0 auto;
+    
+  }

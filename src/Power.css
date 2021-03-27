@@ -1,0 +1,14 @@
+#power-button{
+    border-radius: 50%;
+    border: 2px solid black;
+    padding: 8px;
+    background-color: black;
+    color: white;
+    font-size: 23px;
+    float: right;
+    cursor: pointer;
+  }
+  #power-button:hover{
+    color: #0099ff;
+    border: 2px solid gray;
+  }

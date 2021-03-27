@@ -23,24 +23,6 @@ body{
 }
 
 
-#power-button{
-  border-radius: 50%;
-  border: 2px solid black;
-  padding: 8px;
-  background-color: black;
-  color: white;
-  font-size: 23px;
-  float: right;
-  cursor: pointer;
-}
-#power-button:hover{
-  color: #0099ff;
-  border: 2px solid gray;
-}
-
-#volume {
-  padding: 15px;
-}
 
 #display {
   background-color: gray;
@@ -51,26 +33,5 @@ body{
   margin: 0 auto;
   
 }
-#bank {
-  padding: 15px;
-}
 
-#bank-switch-holder {
-  border: 3px solid black;
-  background-color: black;
-  display: inline-block;
-  height: 20px;
-  width: 50px;
-  cursor: pointer;
-}
-
-#bank-switch{
-  display: block;
-  background-color: red;
-  height: 100%;
-  width: 50%;
-  /*THESE STATE CHANGES WILL LET YOU TOGGLE THE SWITCH LATER:*/
-  /*position: relative;
-  left: 50%;*/
-}
 
