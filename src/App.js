@@ -1,6 +1,6 @@
 
 import './App.css';
-import React, { useState } from 'react';
+import React/*, { useState }*/ from 'react';
 import Machine from './Machine.js';
 
 /*class App extends React.Component {

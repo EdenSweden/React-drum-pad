@@ -10,7 +10,7 @@ function Controls () {
     const [bank, setBank] = useState("kit1");
     
   //MAKE SURE THE SYNTAX FOR THE BELOW FUNCTION IS CORRECT
-    function handleSwitch() {
+    const handleSwitch = () => {
 
       setBank(bank === "kit1" ? "kit2" : "kit1");
         
