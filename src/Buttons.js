@@ -6,18 +6,18 @@ const buttons = [{letter: "Q", url: "https://s3.amazonaws.com/freecodecamp/drums
 
 function Buttons(){
 
+
 const audioRef = useRef();
+//currently only plays the audio from the last url for all buttons.
 const handleAudio = () => {
     audioRef.current.play();
 }
-//use audioRef.current as ref, or audioRef as ref below?
+
 return(
 <div id="button-container">
-    {buttons.map((btn) => <button onClick={handleAudio} className="drum-pad" id={btn.letter}>{btn.letter}<audio ref={audioRef} src={btn.url} preload /></button>)}
+    {buttons.map((btn) => <button onClick={handleAudio} className="drum-pad" id={btn.letter}>{btn.letter}<audio ref={audioRef} src={btn.url} /></button>)}
 </div>
 )
-
-
 
 }
 

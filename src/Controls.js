@@ -14,12 +14,6 @@ function Controls () {
 
       setBank(bank === "kit1" ? "kit2" : "kit1");
         
-      /*if(bank === "kit1"){
-        setBank("kit2");
-      }
-      else if(bank === "kit2") {
-          setBank("kit1");
-      }*/
     }
   
       return (
