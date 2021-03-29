@@ -1,8 +1,8 @@
 import React from 'react';
 import './Power.css';
-import { library } from '@fortawesome/fontawesome-svg-core';
+/*import { library } from '@fortawesome/fontawesome-svg-core';*/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas, faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { /*fas,*/ faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 function Power(){
 

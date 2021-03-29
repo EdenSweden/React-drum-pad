@@ -4,7 +4,7 @@ Drum pad project made for freeCodeCamp, but made in VS Code. Still in progress. 
 Personal note for changes needed:
 
 1. Assign proper audio links to buttons
-2. Add onKeyPress event listeners
+2. Add onKeyDown event listeners
 3. Create array of objects for second drum kit
 4. Add kit switching functionality
 5. Add display functionality
