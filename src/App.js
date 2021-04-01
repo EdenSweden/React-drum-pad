@@ -19,6 +19,7 @@ import Machine from './Machine.js';
 }*/
 
 function App() {
+
   return (
     <div className="App">
       {/*const [power, setPower] = useState(true);

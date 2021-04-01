@@ -6,42 +6,44 @@ const buttons = [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freec
 
 function Buttons(){
 
-/*useEffect(() => {
-//IT WORKS WHEN YOU ADD EVENT LISTENER
+useEffect(() => {
+//IT WORKS WHEN YOU ADD EVENT LISTENER TO THE WINDOW
     window.addEventListener('keydown', handleAudioKeyDown);
 
     return () => {window.removeEventListener('keydown', handleAudioKeyDown);
 };
-});*/
+});
+
+/*useEffect(() => {
+    window.addEventListener("keyup", unfocus);
+    
+    return () => {window.removeEventListener("keyup", unfocus);}
+    });*/
 
 const audioRef = useRef([]);
-//currently only plays the audio from the last url for all buttons.
+const buttonRef = useRef([]);
 const handleAudioClick = (index) => {
     audioRef.current[index].play();
 };
-const testingKeyDown = () => {
-    console.log("keydown detected");
-}
-/*const handleAudioKeyDown = (event, index) => {
-    
-    buttons.forEach(btn => {console.log(btn.keyCode)
-        if(btn.keyCode === event.keyCode){
-            console.log("yay!");
-            audioRef.current[index].play();
-        }
-    });
-    //buttons.forEach(btn => console.log(btn.keyCode === event.keyCode););
-};*/
 
-/*const detectKey = (event, i) => {
-    if (event.keyCode === buttons[i].keyCode) {
-        handleAudio();
-    } 
-}*/
+/*maybe use useState to toggle a state of blur vs focus or green vs gray for the button colors*/
+/*or add onKeyUp event listener that does buttonRef.current[i].blur()*/
+
+const handleAudioKeyDown = (e) => {
+    for(let i = 0; i < buttons.length; i++){
+        if(e.keyCode === buttons[i].keyCode){
+            console.log(audioRef.current[i]);
+            //const unfocus = () => {buttonRef.current[i].blur()};
+            buttonRef.current[i].focus();
+            audioRef.current[i].play();
+            i = buttons.length;
+        }
+    }
+}
 
 return(
-<div id="button-container" tabIndex={0} onKeyDown={testingKeyDown}>
-    {buttons.map((btn, index) => <button key={btn.letter} onClick={() => handleAudioClick(index)} onKeyDown={testingKeyDown} className="drum-pad" id={btn.letter}>{btn.letter}
+<div id="button-container">
+    {buttons.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={() => handleAudioClick(index)} onKeyUp={()=>console.log("keyUp detected")} className="drum-pad" id={btn.letter}>{btn.letter}
         <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} />
     </button>)}
 </div>

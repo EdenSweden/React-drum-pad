@@ -7,8 +7,9 @@
     font-weight: bold;
     cursor: pointer;
   }
-  .drum-pad:hover{
+  .drum-pad:hover, .drum-pad:focus {
     background-color: #00e600;
+    outline: none;
   }
   #button-container {
     background-color: darkGray;
