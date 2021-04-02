@@ -16,7 +16,10 @@
     background-color: red;
     height: 100%;
     width: 50%;
-    /*THESE STATE CHANGES WILL LET YOU TOGGLE THE SWITCH LATER:*/
-    /*position: relative;
-    left: 50%;*/
+    
+  }
+
+  .switched {
+    position: relative;
+    left: 50%;
   }

@@ -10,9 +10,9 @@ function Controls () {
     const [bank, setBank] = useState("kit1");
     
   //MAKE SURE THE SYNTAX FOR THE BELOW FUNCTION IS CORRECT
-    const handleSwitch = () => {
+    const handleSwitchKit = () => {
 
-      setBank(bank === "kit1" ? "kit2" : "kit1");
+      setBank("kit1" ? "kit2" : "kit1");
         
     }
   
@@ -21,7 +21,7 @@ function Controls () {
           <Power />
           <Volume />
           <Display />
-          <Bank switchKit={handleSwitch} />
+          <Bank switchKit={handleSwitchKit} />
         </div>
       );
   }
