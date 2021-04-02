@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import './Bank.css';
 import './BankContext.js';
-import BankContext, { bankOneData, bankTwoData } from './BankContext.js';
+
 
 function Bank(){
   const [kitOneIsActive, setKit] = useState(true);
-  
+
   const toggleKit = () => {
     setKit(!kitOneIsActive);  
     //setKit(bankOneData ? bankTwoData : bankOneData);
@@ -20,9 +20,9 @@ const toggleKit = () => {
 //now that the above is being imported from BankContext.js, will the onClick function still work?
 //wrap the below component in bankContext.Provider value={kitOneIsActive ? bankOneData: bankTwoData}/>
   return (
-  <BankContext.Provider value={kitOneIsActive ? bankOneData : bankTwoData}>
+  <BankContext.Provider value={currentBank}>
     <div id="bank">
-      <div id="bank-switch-holder" onClick={toggleKit}>
+      <div id="bank-switch-holder" onClick={toggleKit, switchBank}>
         <div className={kitOneIsActive ? null : "switched" } id="bank-switch"></div>
       </div>
     </div>
