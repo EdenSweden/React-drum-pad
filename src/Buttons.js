@@ -14,26 +14,16 @@ useEffect(() => {
 };
 });
 
-/*useEffect(() => {
-    window.addEventListener("keyup", unfocus);
-    
-    return () => {window.removeEventListener("keyup", unfocus);}
-    });*/
-
 const audioRef = useRef([]);
 const buttonRef = useRef([]);
 const handleAudioClick = (index) => {
     audioRef.current[index].play();
 };
 
-/*maybe use useState to toggle a state of blur vs focus or green vs gray for the button colors*/
-/*or add onKeyUp event listener that does buttonRef.current[i].blur()*/
-
 const handleAudioKeyDown = (e) => {
     for(let i = 0; i < buttons.length; i++){
         if(e.keyCode === buttons[i].keyCode){
             console.log(audioRef.current[i]);
-            //const unfocus = () => {buttonRef.current[i].blur()};
             buttonRef.current[i].focus();
             audioRef.current[i].play();
             i = buttons.length;
@@ -43,7 +33,7 @@ const handleAudioKeyDown = (e) => {
 
 return(
 <div id="button-container">
-    {buttons.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={() => handleAudioClick(index)} onKeyUp={()=>console.log("keyUp detected")} className="drum-pad" id={btn.letter}>{btn.letter}
+    {buttons.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={() => handleAudioClick(index)} onKeyUp={()=>buttonRef.current[index].blur()} className="drum-pad" id={btn.letter}>{btn.letter}
         <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} />
     </button>)}
 </div>
