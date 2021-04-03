@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import './Bank.css';
-import './BankContext.js';
+import './bankOneContext.js';
 
 
-function Bank(){
+function Bank(props){
   const [kitOneIsActive, setKit] = useState(true);
 
   const toggleKit = () => {
@@ -22,7 +22,7 @@ const toggleKit = () => {
   return (
   <BankContext.Provider value={currentBank}>
     <div id="bank">
-      <div id="bank-switch-holder" onClick={toggleKit, switchBank}>
+      <div id="bank-switch-holder" onClick={toggleKit, props.switchBank}>
         <div className={kitOneIsActive ? null : "switched" } id="bank-switch"></div>
       </div>
     </div>

@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import './Display.css';
-import BankContext, { bankOneData, bankTwoData } from './BankContext.js';
+//import BankContext
 
 
 
 function Display(){
 
 
+
 return (
     <div id="display">
-      <p>#display</p>
+      <p>#display{/*bankData.displayText*/}</p>
     </div>
   );
 }
