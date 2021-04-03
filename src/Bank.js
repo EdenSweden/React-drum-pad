@@ -1,16 +1,18 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import './Bank.css';
-import './BankContext.js';
+import BankContext from'./BankContext.js';
 
 
 function Bank(){
-  const [kitOneIsActive, setKit] = useState(true);
+  //const [kitOneIsActive, setKit] = useState(true);
 
   //const [bankData, toggleBankData] = useState({bankOneData});
 
-  const toggleKit = () => {
-    setKit(!kitOneIsActive);  
-  }
+  /*const toggleKit = () => {
+    setKit(!kitOneIsActive);
+    console.log(kitOneIsActive, BankContext);
+ 
+  }*/
 
   /*switchBank function below should be unnecessary because BankData will decide which is the correct data set based on whether kitOneIsActive = true. test this*/
 
@@ -30,7 +32,7 @@ const toggleKit = () => {
   
     <div id="bank">
       <div id="bank-switch-holder" onClick={toggleKit}>
-        <div className={kitOneIsActive ? null : "switched" } id="bank-switch"></div>
+        <div className={kitOneIsActive ? "switched" : null } id="bank-switch"></div>
       </div>
     </div>
   );

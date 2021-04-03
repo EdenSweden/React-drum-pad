@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Machine.css';
 import Buttons from './Buttons.js';
 import Controls from './Controls.js';
-import './BankContext.js';
-//import BankTwoData from'./bankTwoContext.js';
+import BankDataProvider from './BankContext.js';
+//import BankData, { currentBankData, BankContext } from './BankContext.js';
 
 function Machine() {
 
@@ -20,12 +20,12 @@ const handleSwitchBank = () => {
 */
 
   return (
-      <BankContext.Provider value={bankData}>
+      <BankDataProvider>
       <div id="drum-machine">
         <Buttons />
         <Controls />
       </div>
-      </BankContext.Provider>
+      </BankDataProvider>
   );
 }
 

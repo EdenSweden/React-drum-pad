@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import './Display.css';
-import './BankContext.js';
+import BankData, { BankContext } from './BankContext.js';
 
 
 
 function Display(){
 
-
+const currentBankData = useContext(BankContext);
 
 return (
+    
     <div id="display">
-      <p>{bankData.displayText}</p>
+      <p>{currentBankData.displayText}</p>
     </div>
   );
 }
