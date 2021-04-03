@@ -5,7 +5,7 @@ import Volume from './Volume.js';
 import Display from './Display.js';
 import Bank from './Bank.js';
 //converted the following from a class component to a functional component with hooks:
-function Controls (props) {
+function Controls () {
     
     //const [bank, setBank] = useState("kit1");
     
@@ -21,7 +21,7 @@ function Controls (props) {
           <Power />
           <Volume />
           <Display />
-          <Bank switchBank={props.switchBank} />
+          <Bank />
         </div>
       );
   }

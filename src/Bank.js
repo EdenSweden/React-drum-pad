@@ -1,15 +1,22 @@
 import React, { useState, useContext } from 'react';
 import './Bank.css';
-import './bankOneContext.js';
+import './BankContext.js';
 
 
-function Bank(props){
+function Bank(){
   const [kitOneIsActive, setKit] = useState(true);
+
+  //const [bankData, toggleBankData] = useState({bankOneData});
 
   const toggleKit = () => {
     setKit(!kitOneIsActive);  
-    //setKit(bankOneData ? bankTwoData : bankOneData);
   }
+
+  /*switchBank function below should be unnecessary because BankData will decide which is the correct data set based on whether kitOneIsActive = true. test this*/
+
+  /*const switchBank = () =>{
+    toggleBankData(kitOneIsActive ? bankOneData : bankTwoData);
+  }*/
 /*const [kitOneIsActive, setKit] = useState(false);
 
 //should this toggleKit function/state be passed up to the context or parent?
@@ -20,13 +27,12 @@ const toggleKit = () => {
 //now that the above is being imported from BankContext.js, will the onClick function still work?
 //wrap the below component in bankContext.Provider value={kitOneIsActive ? bankOneData: bankTwoData}/>
   return (
-  <BankContext.Provider value={currentBank}>
+  
     <div id="bank">
-      <div id="bank-switch-holder" onClick={toggleKit, props.switchBank}>
+      <div id="bank-switch-holder" onClick={toggleKit}>
         <div className={kitOneIsActive ? null : "switched" } id="bank-switch"></div>
       </div>
     </div>
-    </BankContext.Provider>
   );
 }
 

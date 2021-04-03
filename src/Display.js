@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Display.css';
-//import BankContext
+import './BankContext.js';
 
 
 
@@ -10,7 +10,7 @@ function Display(){
 
 return (
     <div id="display">
-      <p>#display{/*bankData.displayText*/}</p>
+      <p>{bankData.displayText}</p>
     </div>
   );
 }
