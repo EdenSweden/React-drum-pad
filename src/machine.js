@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import './Machine.css';
 import Buttons from './Buttons.js';
 import Controls from './Controls.js';
+import BankOneData from './bankOneContext.js';
+import BankTwoData from'./bankTwoContext.js';
 
 function Machine() {
 
@@ -11,10 +13,12 @@ function Machine() {
 */
 
   return (
+      <BankContext.Provider value={bankData}>
       <div id="drum-machine">
         <Buttons />
         <Controls />
       </div>
+      </BankContext.Provider>
   );
 }
 
