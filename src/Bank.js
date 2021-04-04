@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './Bank.css';
-import BankContext from'./BankContext.js';
+import BankDataProvider, { BankContext } from'./BankContext.js';
 
 
 function Bank(){
+  
+  const whichKit = useContext(BankContext);
   //const [kitOneIsActive, setKit] = useState(true);
 
   //const [bankData, toggleBankData] = useState({bankOneData});

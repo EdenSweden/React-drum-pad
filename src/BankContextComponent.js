@@ -9,7 +9,7 @@ export default function BankDataProvider({ children }) {
 
 const [kitOneIsActive, setOtherKit] = useState(true);
 
-function toggleKit() {
+const toggleKit = () => {
 
     setOtherKit(prevKit => !prevKit);
 }
