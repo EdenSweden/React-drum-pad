@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './Display.css';
+import { useBank, useBankUpdate } from './BankContext.js';
 import BankData, { BankContext } from './BankContext.js';
 
 
 
 function Display(){
 
-const currentBankData = useContext(BankContext);
+//const currentBankData = useContext(BankContext);
+
+const 
 
 return (
     

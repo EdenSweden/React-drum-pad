@@ -5,14 +5,23 @@ import React, { useState, useContext } from 'react';
 export const BankContext = React.createContext();
 export const BankUpdateContext = React.createContext();
 
-export default function BankDataProvider({ children }) {
+export function useBank() {
+    return useContext(BankContext);
+}
+
+export function useBankUpdate(){
+    return useContext(BankUpdateContext);
+}
+
+export function BankDataProvider({ children }) {
 
 const [kitOneIsActive, setOtherKit] = useState(true);
 
-const toggleKit = () => {
+function toggleKit () {
 
     setOtherKit(prevKit => !prevKit);
 }
+
 
 const bankOneData = {
     soundList: "kit1", displayText: "Heater Kit", /*kitOneIsActive: true*/

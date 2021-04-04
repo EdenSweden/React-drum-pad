@@ -2,10 +2,12 @@ import React from 'react';
 import './Machine.css';
 import Buttons from './Buttons.js';
 import Controls from './Controls.js';
-import BankDataProvider from './BankContext.js';
+import { BankDataProvider } from './BankContext.js';
 //import BankData, { currentBankData, BankContext } from './BankContext.js';
 
-function Machine() {
+export const BankContext = React.createContext();
+
+export default function Machine() {
 
 /*const [kitOneIsActive, toggleActiveKit] = useState(true);  
 const bankData = kitOneisActive ? bankOneData : bankTwoData;
@@ -28,5 +30,3 @@ const handleSwitchBank = () => {
       </BankDataProvider>
   );
 }
-
-export default Machine;
