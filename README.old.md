@@ -3,7 +3,6 @@ Drum pad project made for freeCodeCamp, but made in VS Code. Still in progress. 
 
 Personal note for changes needed:
 
-2. Add display functionality
 3. Add power button functionality
 4. Add volume functionality
 5. Make adjustments for mobile responsiveness
