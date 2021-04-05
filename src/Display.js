@@ -1,6 +1,6 @@
 import React from 'react';
 import './Display.css';
-import BankDataProvider, { useBank, useBankUpdate, useDrumKitData} from './BankContext.js';
+import {useDrumKitData} from './BankContext.js';
 
 
 

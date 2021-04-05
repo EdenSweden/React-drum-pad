@@ -1,14 +1,14 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './Buttons.css';
-import BankDataProvider, { useBank, useBankUpdate, useDrumKitData} from './BankContext.js';
-import { usePower, usePowerToggle } from './PowerButtonContext.js';
+import { useDrumKitData} from './BankContext.js';
+import { usePower } from './PowerButtonContext.js';
 
 
-const isPowerOn = usePower();
-//const togglePower = usePowerToggle();
 
 
 function Buttons(){
+
+const isPowerOn = usePower();
 
 
 useEffect(() => {
@@ -21,8 +21,8 @@ useEffect(() => {
 
 const audioRef = useRef([]);
 const buttonRef = useRef([]);
-const kitOneIsActive = useBank();
-const toggleKit = useBankUpdate();
+//const kitOneIsActive = useBank();
+//const toggleKit = useBankUpdate();
 const drumKitData = useDrumKitData();
 
 const handleAudioClick = (index) => {

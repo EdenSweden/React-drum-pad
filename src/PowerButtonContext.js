@@ -1,15 +1,19 @@
 import React, { useState, useContext } from 'react';
 
-const powerButtonContext = React.createContext();
-const powerToggleContext = React.createContext();
+const PowerButtonContext = React.createContext();
+const PowerToggleContext = React.createContext();
 
 
 
 //custom hooks for context providers
 
-export const usePower = useContext(powerButtonContext);
-export const usePowerToggle = useContext(powerToggleContext);
+export function usePower() {
+    return useContext(PowerButtonContext);
+}
 
+export function usePowerToggle() {
+    return useContext(PowerToggleContext);
+}
 //powerButtonContext:
 export default function PowerButtonProvider({ children }){
 
@@ -24,9 +28,9 @@ function togglePower(){
 
 return (
 <PowerButtonContext.Provider value={isPowerOn}>
-    <powerToggleContext.Provider value={togglePower}>
+    <PowerToggleContext.Provider value={togglePower}>
     {children}
-    </powerToggleContext.Provider>
+    </PowerToggleContext.Provider>
 </PowerButtonContext.Provider>
 
 );

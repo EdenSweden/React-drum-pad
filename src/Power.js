@@ -6,10 +6,12 @@ import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { usePower, usePowerToggle } from './PowerButtonContext.js';
 
 
-const isPowerOn = usePower();
-const togglePower = usePowerToggle();
+
 
 function Power(){
+
+const isPowerOn = usePower();
+const togglePower = usePowerToggle();
 
     return (
         <div id="power">
