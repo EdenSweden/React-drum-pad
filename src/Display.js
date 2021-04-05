@@ -1,19 +1,18 @@
 import React from 'react';
 import './Display.css';
-import { useBank, useBankUpdate } from './BankContext.js';
-import BankData, { BankContext } from './BankContext.js';
+import BankDataProvider, { useBank, useBankUpdate, useDrumKitData} from './BankContext.js';
 
 
 
 function Display(){
 
-const currentBankData = useBank();
+const drumKitData = useDrumKitData();
 
 
 return (
     
     <div id="display">
-      <p>{currentBankData.displayText}</p>
+      <p>{drumKitData.displayText}</p>
     </div>
   );
 }

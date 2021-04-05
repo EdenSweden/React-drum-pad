@@ -5,8 +5,8 @@ import BankDataProvider, { useBank, useBankUpdate } from'./BankContext.js';
 
 function Bank(){
   
-  const kitOneIsActive = useBank()
-  const toggleKit = useBankUpdate()
+  const kitOneIsActive = useBank();
+  const toggleKit = useBankUpdate();
   //const [kitOneIsActive, setKit] = useState(true);
 
   //const [bankData, toggleBankData] = useState({bankOneData});
