@@ -7,9 +7,8 @@ import BankData, { BankContext } from './BankContext.js';
 
 function Display(){
 
-//const currentBankData = useContext(BankContext);
+const currentBankData = useBank();
 
-const 
 
 return (
     

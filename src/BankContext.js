@@ -5,6 +5,7 @@ import React, { useState, useContext } from 'react';
 export const BankContext = React.createContext();
 export const BankUpdateContext = React.createContext();
 
+
 export function useBank() {
     return useContext(BankContext);
 }
@@ -13,27 +14,34 @@ export function useBankUpdate(){
     return useContext(BankUpdateContext);
 }
 
-export function BankDataProvider({ children }) {
+//BankContext:
+export default function BankDataProvider({ children }) {
 
-const [kitOneIsActive, setOtherKit] = useState(true);
+const bankOneData = {
+    soundList: kitOne, displayText: "Heater Kit", /*kitOneIsActive: true*/
+        };
+const bankTwoData = {
+    soundList: kitTwo, displayText: "Smooth Piano Kit", /*kitOneIsActive: false*/
+};
 
+const [kitOneIsActive, setOtherKitActive] = useState(true);
+
+//use useState here and create another context?
+//const [currentBankData, switchCurrentBankData] = useState(bankOneData);
+const currentBankData = bankOneData;
+//BankUpdateContext:
 function toggleKit () {
 
-    setOtherKit(prevKit => !prevKit);
+    setOtherKitActive(prevKit => !prevKit);
+    currentBankData = kitOneIsActive ? bankOneData : bankTwoData;
+    console.log(currentBankData.soundList);
 }
 
 
-const bankOneData = {
-    soundList: "kit1", displayText: "Heater Kit", /*kitOneIsActive: true*/
-        };
-const bankTwoData = {
-    soundList: "kit2", displayText: "Smooth Piano Kit", /*kitOneIsActive: false*/
-};
 
-const currentBankData = kitOneIsActive ? bankOneData : bankTwoData;
-//should value be kitOneIsActive or currentBankData?
-return <BankContext.Provider value={kitOneIsActive}>
-    <BankUpdateContext.Provider value={toggleKit}>
+//values below may need to be changed?
+return <BankContext.Provider value={{kitOneIsActive, bankOneData, bankTwoData, currentBankData}}>
+    <BankUpdateContext.Provider value={{toggleKit, bankOneData, bankTwoData, currentBankData}}>
     { children }
     </BankUpdateContext.Provider>
     

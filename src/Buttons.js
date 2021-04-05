@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './Buttons.css';
-import kitOneIsActive from './Bank.js';
+import BankDataProvider, { useBank, useBankUpdate } from './BankContext.js';
 
 const kitOne = [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"}, {letter: "W", keyCode: 87, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3"}, {letter: "E", keyCode: 69, url:"https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3"}, {letter: "A", keyCode: 65, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3"}, {letter: "S", keyCode: 83, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3"}, {letter: "D", keyCode: 68, url: "https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3"}, {letter: "Z", keyCode: 90, url: "https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3"}, {letter: "X", keyCode: 88, url: "https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3"}, {letter: "C", keyCode: 67, url: "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3"}];
 
@@ -9,10 +9,8 @@ const kitTwo = [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freeco
 
 function Buttons(){
 
-const whichKit = kitOneIsActive ? kitOne : kitTwo;
-
 useEffect(() => {
-//IT WORKS WHEN YOU ADD EVENT LISTENER TO THE WINDOW
+
     window.addEventListener('keydown', handleAudioKeyDown);
 
     return () => {window.removeEventListener('keydown', handleAudioKeyDown);
@@ -21,25 +19,30 @@ useEffect(() => {
 
 const audioRef = useRef([]);
 const buttonRef = useRef([]);
+const whichKit = useBank();
+const currentBank = currentBankData.soundList;
+const toggleKit = useBankUpdate();
 const handleAudioClick = (index) => {
     audioRef.current[index].play();
 };
 
 
+
 const handleAudioKeyDown = (e) => {
-    for(let i = 0; i < whichKit.length; i++){
-        if(e.keyCode === whichKit[i].keyCode){
+    for(let i = 0; i < currentBank.length; i++){
+        if(e.keyCode === currentBank[i].keyCode){
             console.log(audioRef.current[i]);
             buttonRef.current[i].focus();
             audioRef.current[i].play();
-            i = whichKit.length;
+            i = currentBank.length;
         }
     }
 }
 
 return(
+
 <div id="button-container">
-    {whichKit.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={() => handleAudioClick(index)} onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()} className="drum-pad" id={btn.letter}>{btn.letter}
+    {currentBank.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={() => handleAudioClick(index)} onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()} className="drum-pad" id={btn.letter}>{btn.letter}
         <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} />
     </button>)}
 </div>
