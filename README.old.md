@@ -3,6 +3,8 @@ Drum pad project made for freeCodeCamp, but made in VS Code. Still in progress. 
 
 Personal note for changes needed:
 
+issues: fix potential infinite if/else loop on Buttons.js
+
 
 1. Add kit switching functionality
 2. Add display functionality
