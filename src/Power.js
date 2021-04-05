@@ -13,7 +13,7 @@ function Power(){
 
     return (
         <div id="power">
-            <button id="power-button" onClick={togglePower}>
+            <button id="power-button" onClick={togglePower} className={isPowerOn ? "power-on" : null}>
               <FontAwesomeIcon icon={faPowerOff} aria-hidden='true' />
             </button>
         </div>
