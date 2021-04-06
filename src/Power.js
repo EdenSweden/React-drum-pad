@@ -16,7 +16,7 @@ const togglePower = usePowerToggle();
 
     return (
         <div id="power">
-            <button className={isPowerOn ? "power-off" : "power-on"} id="power-button" onClick={togglePower}>
+            <button className={isPowerOn ? "power-on" : "power-off"} id="power-button" onClick={togglePower}>
               <FontAwesomeIcon icon={faPowerOff} aria-hidden="true" />
             </button>
         </div>
