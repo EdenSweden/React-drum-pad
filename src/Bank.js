@@ -12,7 +12,7 @@ function Bank(){
   return (
   
     <div id="bank">
-      <div id="bank-switch-holder" onClick={toggleKit}>
+      <div id="bank-switch-holder" onClick={toggleKit} tabIndex={0}>
         <div className={kitOneIsActive ? "switched" : null } id="bank-switch"></div>
       </div>
     </div>

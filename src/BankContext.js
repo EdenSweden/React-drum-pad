@@ -29,7 +29,7 @@ const [kitOneIsActive, setOtherKitActive] = useState(true);
 function toggleKit () {
 
     setOtherKitActive(prevKit => !prevKit);
-    console.log(drumKitData.buttonList[0].url);
+    //console.log(drumKitData.buttonList[0].url);
 }
 //DrumKitDataContext:
 

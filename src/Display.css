@@ -3,7 +3,8 @@
     border: 2px solid black;
     display: inline-block;
     width: 70%;
-    height: min-content;
+    /*height: min-content;*/
+    height: 55px;
     margin: 0 auto;
     
   }
