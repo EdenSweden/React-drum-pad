@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Power.css';
 /*import { library } from '@fortawesome/fontawesome-svg-core';*/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,10 +13,11 @@ function Power(){
 const isPowerOn = usePower();
 const togglePower = usePowerToggle();
 
+
     return (
         <div id="power">
-            <button id="power-button" onClick={togglePower} className={isPowerOn ? "power-on" : null}>
-              <FontAwesomeIcon icon={faPowerOff} aria-hidden='true' />
+            <button className={isPowerOn ? "power-off" : "power-on"} id="power-button" onClick={togglePower}>
+              <FontAwesomeIcon icon={faPowerOff} aria-hidden="true" />
             </button>
         </div>
         );

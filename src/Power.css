@@ -1,19 +1,28 @@
-#power-button{
-    border-radius: 50%;
-    border: 2px solid black;
-    padding: 8px;
-    background-color: black;
-    color: white;
-    font-size: 23px;
-    float: right;
-    cursor: pointer;
-  }
-  #power-button:hover{
-    color: #0099ff;
-    border: 2px solid gray;
-  }
 
-  .power-on {
+#power-button {
+  border-radius: 50%;
+  padding: 8px;
+  background-color: black;
+  font-size: 23px;
+  float: right;
+  cursor: pointer;
+}
+/*[id="power-button"] button {
+  color: white;
+  border: 2px solid black;
+    
+  }*/
+  /*#power-button:hover{
     color: #0099ff;
     border: 2px solid gray;
+  }*/
+
+  button.power-on {
+    color: #0099ff;
+    border: 2px solid gray;
+  }
+  button.power-off{
+    color: white;
+    border: 2px solid black;
+    
   }
