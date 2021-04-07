@@ -17,8 +17,8 @@ function Volume(){
             type="range"
             min="0"
             max="100"
-            //value={currentVolume * 10}
-            onInput={(e)=>console.log(e.target.value)}
+            value={currentVolume * 100}
+            onInput={changeVolume}
           ></input>
         </div>
       );

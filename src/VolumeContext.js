@@ -19,7 +19,7 @@ export default function VolumeProvider({ children }) {
 const [ currentVolume, setCurrentVolume ] = useState(0.5);
 
 function changeVolume(e) {
-    setCurrentVolume(e.target.value);
+    setCurrentVolume(e.target.value / 100);
 };
 
 return(

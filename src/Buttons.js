@@ -2,11 +2,17 @@ import React, { useRef, useEffect } from 'react';
 import './Buttons.css';
 import { useDrumKitData } from './BankContext.js';
 import { usePower } from './PowerButtonContext.js';
+import { useVolume } from './VolumeContext.js';
 
 
 
 
 function Buttons(){
+
+const currentVolume = useVolume();
+//const changeVolume = useUpdateVolume();
+
+const drumKitData = useDrumKitData();
 
 const isPowerOn = usePower();
 
@@ -21,23 +27,15 @@ useEffect(() => {
 
 const audioRef = useRef([]);
 const buttonRef = useRef([]);
-//const randomRef = useRef();
-//const kitOneIsActive = useBank();
-//const toggleKit = useBankUpdate();
-const drumKitData = useDrumKitData();
 
-//fix audio click
 
-/*const sleuthItOut = () => {
-    console.log(randomRef.current);
-}*/
 
 const handleAudioClick = (e) => {
     
     const clickedSound = e.target.children[0].attributes[0].nodeValue;
-    //clickedSound.play();
     for(let i = 0; i < drumKitData.buttonList.length; i++){
-        if(clickedSound === audioRef.current[i].src){ 
+        if(clickedSound === audioRef.current[i].src){
+            audioRef.current[i].volume = currentVolume; 
             audioRef.current[i].play();
             console.log(audioRef.current[i].volume);
         }
@@ -53,6 +51,7 @@ const handleAudioKeyDown = (e) => {
             //console.log(audioRef.current[i]);
             buttonRef.current[i].focus();
             const currentSound = audioRef.current[i];
+            currentSound.volume = currentVolume;
             const playPromise = () => currentSound.play();
             if(playPromise /*&& currentSound.currentTime === currentSound.duration*/) {
                 playPromise().then(()=> {
