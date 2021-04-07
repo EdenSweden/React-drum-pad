@@ -38,9 +38,7 @@ const handleAudioClick = (e) => {
     //clickedSound.play();
     for(let i = 0; i < drumKitData.buttonList.length; i++){
         if(clickedSound === audioRef.current[i].src){ 
-        //console.log(audioRef.current[i].src);
-    audioRef.current[i].play();
-    //clickedSound.play();
+            audioRef.current[i].play();
         }
     }
 
