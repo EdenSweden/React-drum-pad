@@ -4,17 +4,23 @@ import React, { useState, useContext } from 'react';
 const VolumeContext = React.createContext();
 const UpdateVolumeContext = React.createContext();
 
+
+
 //custom hooks for volume
-export const useVolume = useContext(VolumeContext);
-export const useUpdateVolume = useContext(UpdateVolumeContext);
+export function useVolume() { 
+    return useContext(VolumeContext);
+}
+export function useUpdateVolume(){
+    return useContext(UpdateVolumeContext);
+}
+
+export default function VolumeProvider({ children }) {
 
 const [ currentVolume, setCurrentVolume ] = useState(0.5);
 
-const changeVolume = (e) =>{
+function changeVolume(e) {
     setCurrentVolume(e.target.value);
 };
-
-export default function VolumeProvider({ children }) {
 
 return(
     <VolumeContext.Provider value={currentVolume}>
