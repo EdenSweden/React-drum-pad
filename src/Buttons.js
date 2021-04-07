@@ -21,20 +21,28 @@ useEffect(() => {
 
 const audioRef = useRef([]);
 const buttonRef = useRef([]);
+//const randomRef = useRef();
 //const kitOneIsActive = useBank();
 //const toggleKit = useBankUpdate();
 const drumKitData = useDrumKitData();
 
 //fix audio click
 
-const handleAudioClick = (index) => {
+/*const sleuthItOut = () => {
+    console.log(randomRef.current);
+}*/
+
+const handleAudioClick = (e) => {
+    
+    const clickedSound = e.target.children[0].attributes[0].nodeValue;
+    //clickedSound.play();
     for(let i = 0; i < drumKitData.buttonList.length; i++){
-        if(drumKitData.buttonList[index].url === audioRef.current[index]){
-            console.log(audioRef.current[index]);
+        if(clickedSound === audioRef.current[i].src){ 
+        //console.log(audioRef.current[i].src);
+    audioRef.current[i].play();
+    //clickedSound.play();
         }
     }
-    //audioRef.current[index].play();
-    //console.log(audioRef);
 
 };
 
@@ -68,8 +76,8 @@ const handleAudioKeyDown = (e) => {
 
 return(
 
-<div id="button-container">
-    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={isPowerOn ? handleAudioClick(index) : null} onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()} className="drum-pad" id={btn.letter}>{btn.letter}
+<div id="button-container" /*ref={randomRef} onClick={sleuthItOut}*/>
+    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={isPowerOn ? handleAudioClick : null} onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()} className="drum-pad" id={btn.letter}>{btn.letter}
         <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} preload />
     </button>)}
 </div>
