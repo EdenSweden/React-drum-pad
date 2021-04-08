@@ -39,10 +39,9 @@ const handleAudioClick = (e) => {
             audioRef.current[i].play();
             //on another click
             if (!audioRef.current[i].paused) {
-                audioRef.current[i].pause();
+                //audioRef.current[i].pause();
                 audioRef.current[i].currentTime = 0;
                 audioRef.current[i].play();
-                
             }
             
             console.log(audioRef.current[i].duration);
@@ -60,20 +59,14 @@ const handleAudioKeyDown = (e) => {
             buttonRef.current[i].focus();
             const currentSound = audioRef.current[i];
             currentSound.volume = currentVolume;
-            const playPromise = () => currentSound.play();
-            if(playPromise /*&& currentSound.currentTime === currentSound.duration*/) {
-                playPromise().then(()=> {
-                    /*if currentSound.currentTime < currentSound.duration, make it replay if interrupted by another keyDown*/
-                  if(currentSound.currentTime === currentSound.duration){  
-                console.log("success");
-                  }
-                }
-                ).catch(()=>{
-                    currentSound.pause();
-                    currentSound.currentTime = 0;
-                    console.log("audio interrupted");
-                })
+            currentSound.play();
+            //on another tap
+            if (!audioRef.current[i].paused) {
+                //audioRef.current[i].pause();
+                audioRef.current[i].currentTime = 0;
+                audioRef.current[i].play();
             }
+
             //audioRef.current[i].play();
             i = drumKitData.buttonList.length;
         }
