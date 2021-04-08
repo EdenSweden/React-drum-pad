@@ -3,7 +3,7 @@ Drum pad project made for freeCodeCamp, but made in VS Code. Still in progress. 
 
 Personal note for changes needed:
 
-1. Make volume change dynamically as sound is produced
+1. Make volume change dynamically as sound is produced. Maybe add event listener?
 2. Change audio preload to metadata for better performance?
 3. Fix hover css when power is off
 4. Fix async issues with sound interruption/re-tapping keys/power shutoff

@@ -17,7 +17,7 @@ export function usePowerToggle() {
 //powerButtonContext:
 export default function PowerButtonProvider({ children }){
 
-const [isPowerOn, setPower] = useState(false);
+const [isPowerOn, setPower] = useState(true);
 
 //powerToggleContext:    
 function togglePower(){
