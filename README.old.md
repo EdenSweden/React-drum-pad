@@ -5,8 +5,7 @@ Personal note for changes needed:
 
 1. Make volume change dynamically as sound is produced. Maybe add event listener?
 2. Change audio preload to metadata for better performance?
-3. Fix hover css when power is off
-4. Fix async issues with sound interruption/re-tapping keys/power shutoff
+4. Fix issues withcontinued playback after power shutoff
 5. Make accessible
 6. Make adjustments for mobile responsiveness
 7. Make any needed adjustments to pass freeCodeCamp tests

@@ -23,6 +23,7 @@ const [isPowerOn, setPower] = useState(true);
 function togglePower(){
 
     setPower(!isPowerOn);
+    console.log(!isPowerOn);
     //console.log(isPowerOn);
     //console.log(isPowerOn ? "power-on" : "power-off");
     
