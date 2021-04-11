@@ -6,9 +6,6 @@ import { useVolume } from './VolumeContext.js';
 import { useClickedAudio, useTappedAudio } from './AudioContext.js';
 
 
-//try to pass audioRef.current[i] as a prop to VolumeContext parent component
-
-
 function Buttons(){
 
 const handleAudioClick = useClickedAudio();
