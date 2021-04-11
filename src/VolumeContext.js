@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Buttons, { audioRef } from './Buttons.js';
-//create volume context
+import { useClickedAudio, useTappedAudio } from './AudioContext.js';
 const VolumeContext = React.createContext();
 const UpdateVolumeContext = React.createContext();
 

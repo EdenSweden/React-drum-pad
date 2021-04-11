@@ -10,6 +10,7 @@ import VolumeProvider from './VolumeContext.js';
 export default function Machine() {
 
   return (
+  <AudioProvider>
     <PowerButtonProvider>
       <BankDataProvider>
         <VolumeProvider>
@@ -20,5 +21,6 @@ export default function Machine() {
         </VolumeProvider>
       </BankDataProvider>
     </PowerButtonProvider>
+  </AudioProvider>
   );
 }

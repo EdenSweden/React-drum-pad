@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useClickedAudio, useTappedAudio } from './AudioContext.js';
 
 const PowerButtonContext = React.createContext();
 const PowerToggleContext = React.createContext();

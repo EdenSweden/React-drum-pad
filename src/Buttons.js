@@ -3,6 +3,7 @@ import './Buttons.css';
 import { useDrumKitData } from './BankContext.js';
 import { usePower } from './PowerButtonContext.js';
 import { useVolume } from './VolumeContext.js';
+import { useClickedAudio, useTappedAudio } from './AudioContext.js';
 
 
 //try to pass audioRef.current[i] as a prop to VolumeContext parent component
@@ -10,6 +11,8 @@ import { useVolume } from './VolumeContext.js';
 
 function Buttons(){
 
+const handleAudioClick = useClickedAudio();
+const handleAudioKeyDown = useTappedAudio();
 
 const currentVolume = useVolume();
 //const changeVolume = useUpdateVolume();
@@ -38,11 +41,11 @@ const audioRef = useRef([]);
 const buttonRef = useRef([]);
 
 
-const handleAudioClick = (e) => {
+/*const handleAudioClick = (e) => {
     /*maybe memoize this and export it for volume control/cutoff w/ power shutoff?*/
-    console.log(e.target.children[0]);
+    //console.log(e.target.children[0]);
     //console.log(e.target.children[0].paused);
-    const clickedSound = e.target.children[0].attributes[0].nodeValue;
+    /*const clickedSound = e.target.children[0].attributes[0].nodeValue;
     for(let i = 0; i < drumKitData.buttonList.length; i++){
         if(clickedSound === audioRef.current[i].src){
             //audioRef.current[i].volume = currentVolume;
@@ -56,14 +59,10 @@ const handleAudioClick = (e) => {
                 audioRef.current[i].pause();
                 audioRef.current[i].currentTime = 0;
             }
-            
-            //console.log(audioRef.current[i].duration);
+            console.log(audioRef.current[i]);
         }
     }
-
 };
-
-
 
 const handleAudioKeyDown = (e) => {
     for(let i = 0; i < drumKitData.buttonList.length; i++){
@@ -79,7 +78,8 @@ const handleAudioKeyDown = (e) => {
                 audioRef.current[i].currentTime = 0;
                 audioRef.current[i].play();
             }
-            else if(!audioRef.current[i].paused && isPowerOn){
+            //change this?
+            else if(!audioRef.current[i].paused && !isPowerOn){
                 audioRef.current[i].pause();
                 audioRef.current[i].currentTime = 0;
             }
@@ -88,7 +88,7 @@ const handleAudioKeyDown = (e) => {
             //i = drumKitData.buttonList.length;
         }
     }
-}
+}*/
 
 return(
 
