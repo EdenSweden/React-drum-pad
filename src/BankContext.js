@@ -19,9 +19,9 @@ export function useDrumKitData(){
 }
 
 
-//BankContext:
-export default function BankDataProvider({ children }) {
 
+export default function BankDataProvider({ children }) {
+//BankContext:
 const [kitOneIsActive, setOtherKitActive] = useState(true);
 
 

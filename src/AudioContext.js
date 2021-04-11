@@ -1,4 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
+import { useBank, useBankUpdate, useDrumKitData } from './BankContext.js';
+import { useVolume, useUpdateVolume } from './VolumeContext.js';
+import { usePower, usePowerToggle } from './PowerButtonContext.js';
+
+var audioRef;
+var buttonRef;
+
+export function useAudioRef(){
+   return audioRef = useRef([]);
+}
+    
+export function useButtonRef(){
+    return buttonRef = useRef([]);
+}
+
 
 const ClickedAudioContext = React.createContext();
 const TappedAudioContext = React.createContext();
@@ -12,7 +27,16 @@ export function useTappedAudio(){
 
 
 
+
 export default function AudioProvider({ children }){
+
+    const kitOneIsActive = useBank();
+    const toggleKit = useBankUpdate();
+    const drumKitData = useDrumKitData();
+    const isPowerOn = usePower();
+    const togglePower = usePowerToggle();
+    const currentVolume = useVolume();
+    const changeVolume = useUpdateVolume();
 
     const handleAudioClick = (e) => {
         /*maybe memoize this and export it for volume control/cutoff w/ power shutoff?*/

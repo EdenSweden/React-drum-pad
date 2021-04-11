@@ -3,11 +3,15 @@ import './Buttons.css';
 import { useDrumKitData } from './BankContext.js';
 import { usePower } from './PowerButtonContext.js';
 import { useVolume } from './VolumeContext.js';
-import { useClickedAudio, useTappedAudio } from './AudioContext.js';
+import { useClickedAudio, useTappedAudio, useAudioRef, useButtonRef } from './AudioContext.js';
 
 
 function Buttons(){
+//access the audio files and buttons from AudioContext.js
+const audioRef = useAudioRef();
+const buttonRef = useButtonRef();
 
+//access audio click/keydown functions from AudioContext.js
 const handleAudioClick = useClickedAudio();
 const handleAudioKeyDown = useTappedAudio();
 
@@ -34,8 +38,8 @@ useEffect(() => {
 };
 });
 
-const audioRef = useRef([]);
-const buttonRef = useRef([]);
+/*const audioRef = useRef([]);
+const buttonRef = useRef([]);*/
 
 
 /*const handleAudioClick = (e) => {
