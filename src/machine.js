@@ -11,17 +11,17 @@ import AudioProvider from './AudioContext.js';
 export default function Machine() {
 
   return (
-  <AudioProvider>
-    <PowerButtonProvider>
-      <BankDataProvider>
+  <BankDataProvider>
+    <AudioProvider>
+      <PowerButtonProvider>
         <VolumeProvider>
       <div id="drum-machine">
         <Buttons />
         <Controls />
       </div>
         </VolumeProvider>
-      </BankDataProvider>
-    </PowerButtonProvider>
-  </AudioProvider>
+      </PowerButtonProvider>
+    </AudioProvider>
+  </BankDataProvider>
   );
 }

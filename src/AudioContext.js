@@ -52,10 +52,10 @@ export default function AudioProvider({ children }){
                   audioRef.current[i].currentTime = 0;
                     audioRef.current[i].play();
                 }
-                if(!isPowerOn){
+                /*if(!isPowerOn){
                     audioRef.current[i].pause();
                     audioRef.current[i].currentTime = 0;
-                }
+                }*/
                 console.log(audioRef.current[i]);
                 //return audioRef.current[i] so it can be exported?
             }
@@ -66,9 +66,11 @@ export default function AudioProvider({ children }){
         for(let i = 0; i < drumKitData.buttonList.length; i++){
             if(e.keyCode === drumKitData.buttonList[i].keyCode){
                 //console.log(audioRef.current[i]);
-                buttonRef.current[i].focus();
+                console.log(buttonRef.current[i]);
+                buttonRef.current[i].style.backgroundColor = "rgb(0, 230, 0)";
+                //buttonRef.current[i].focus();
                 const currentSound = audioRef.current[i];
-                currentSound.volume = currentVolume;
+                //currentSound.volume = currentVolume;
                 currentSound.play();
                 //on another tap
                 if (!audioRef.current[i].paused && isPowerOn) {
@@ -77,15 +79,16 @@ export default function AudioProvider({ children }){
                     audioRef.current[i].play();
                 }
                 //change this?
-                else if(!audioRef.current[i].paused && !isPowerOn){
+                /*else if(!audioRef.current[i].paused && !isPowerOn){
                     audioRef.current[i].pause();
                     audioRef.current[i].currentTime = 0;
-                }
+                }*/
     
                 //audioRef.current[i].play();
                 //i = drumKitData.buttonList.length;
             }
         }
+        
     }    
 
 
