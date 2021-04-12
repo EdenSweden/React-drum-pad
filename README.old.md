@@ -1,5 +1,5 @@
 # react-drum-pad
-Drum pad project made for freeCodeCamp, but made in VS Code. Still in progress. Edits to be made later.
+Drum pad project made for freeCodeCamp, but made in VS Code. Still in progress.
 
 Personal note for changes needed:
 
@@ -9,3 +9,4 @@ Personal note for changes needed:
 4. Make adjustments for mobile responsiveness
 5. Make any needed adjustments to pass freeCodeCamp tests
 6. Finishing touches
+7. Clean up excessive comments/notes

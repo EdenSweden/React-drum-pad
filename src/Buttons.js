@@ -4,6 +4,7 @@ import { useDrumKitData } from './BankContext.js';
 import { usePower } from './PowerButtonContext.js';
 import { useVolume } from './VolumeContext.js';
 import { useClickedAudio, useTappedAudio, useAudioRef, useButtonRef } from './AudioContext.js';
+import Volume from './Volume.js';
 
 
 function Buttons(){

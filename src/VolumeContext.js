@@ -20,6 +20,7 @@ const [ currentVolume, setCurrentVolume ] = useState(0.5);
 
 function changeVolume(e) {
     setCurrentVolume(e.target.value / 100);
+    console.log(currentVolume);
     //if volume is adjusted while sound is playing:
     /*if (!audioRef.current[i].paused) {    
     setCurrentVolume(e.target.value / 100);
