@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { useBank, useBankUpdate, useDrumKitData } from './BankContext.js';
 import { useVolume, useUpdateVolume } from './VolumeContext.js';
 import { usePower, usePowerToggle } from './PowerButtonContext.js';
@@ -65,19 +65,20 @@ export default function AudioProvider({ children }){
     const handleAudioKeyDown = (e) => {
         for(let i = 0; i < drumKitData.buttonList.length; i++){
             if(e.keyCode === drumKitData.buttonList[i].keyCode){
-                //console.log(audioRef.current[i]);
-                console.log(buttonRef.current[i]);
-                buttonRef.current[i].style.backgroundColor = "rgb(0, 230, 0)";
-                //buttonRef.current[i].focus();
+                buttonRef.current[i].style.backgroundColor = 'rgb(0, 230, 0)';
                 const currentSound = audioRef.current[i];
                 //currentSound.volume = currentVolume;
                 currentSound.play();
                 //on another tap
-                if (!audioRef.current[i].paused && isPowerOn) {
+                if (!audioRef.current[i].paused) {
                     //audioRef.current[i].pause();
                     audioRef.current[i].currentTime = 0;
                     audioRef.current[i].play();
                 }
+                window.addEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
+                return window.removeEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
+                
+                
                 //change this?
                 /*else if(!audioRef.current[i].paused && !isPowerOn){
                     audioRef.current[i].pause();

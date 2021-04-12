@@ -91,6 +91,11 @@ const handleAudioKeyDown = (e) => {
         }
     }
 }*/
+//get the i out of the keydown function and put it here
+/*
+function handleKeyUp(){
+    buttonRef.current[i].style.backgroundColor = "gray";
+}*/
 
 return(
 
