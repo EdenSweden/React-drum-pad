@@ -14,7 +14,7 @@ export function useButtonRef(){
     return buttonRef = useRef([]);
 }
 
-
+//create context for whether or not audio is playing?
 const ClickedAudioContext = React.createContext();
 const TappedAudioContext = React.createContext();
 
@@ -52,26 +52,29 @@ export default function AudioProvider({ children }){
             if(clickedSound === audioRef.current[i].src){
                 //This is where your bug is:
                 //audioRef.current[i].volume = currentVolume;
+                console.log("currentVolume value: " + currentVolume);
+                /*currentVolume above is undefined because AudioContext is the parent of VolumeContext. Maybe make a single context file with all everything?*/
+                console.log("volume: "+ audioRef.current[i].volume);
                 audioRef.current[i].play();
                 toggleIsPlaying(true);
-                console.log(isPlaying);
+                //console.log(isPlaying);
                 //on another click
                 if (!audioRef.current[i].paused) {
                   toggleIsPlaying(true);
-                  console.log(isPlaying);  
+                  //console.log(isPlaying);  
                   audioRef.current[i].currentTime = 0;
                     audioRef.current[i].play();
                 }
 
                 else if (audioRef.current[i].paused) {
                     toggleIsPlaying(false);
-                    console.log(isPlaying);
+                    //console.log(isPlaying);
                 }
                 /*if(!isPowerOn){
                     audioRef.current[i].pause();
                     audioRef.current[i].currentTime = 0;
                 }*/
-                console.log(audioRef.current[i]);
+                //console.log(audioRef.current[i]);
                 //return audioRef.current[i] so it can be exported?
             }
             

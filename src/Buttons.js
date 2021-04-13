@@ -16,7 +16,7 @@ const buttonRef = useButtonRef();
 const handleAudioClick = useClickedAudio();
 const handleAudioKeyDown = useTappedAudio();
 
-const currentVolume = useVolume();
+//const currentVolume = useVolume();
 //const changeVolume = useUpdateVolume();
 
 const drumKitData = useDrumKitData();
