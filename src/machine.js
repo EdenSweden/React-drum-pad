@@ -7,12 +7,12 @@ import PowerButtonProvider from'./PowerButtonContext.js';
 import VolumeProvider from './VolumeContext.js';
 import AudioProvider, { useClickedAudio, useTappedAudio } from './AudioContext.js';
 //import BankData, { currentBankData, BankContext } from './BankContext.js';*/
-import MasterContextProvider from './MasterContext.js';
+import MasterProvider from './MasterContext.js';
 
 export default function Machine() {
 
   return (
-    <MasterContextProvider>
+    <MasterProvider>
   {/*<BankDataProvider>
     <AudioProvider>
       <PowerButtonProvider>
@@ -25,6 +25,6 @@ export default function Machine() {
       </PowerButtonProvider>
     </AudioProvider>
 </BankDataProvider>*/}
-  </MasterContextProvider>
+  </MasterProvider>
   );
 }

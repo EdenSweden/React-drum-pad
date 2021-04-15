@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext }from 'react';
 import './Bank.css';
+import MasterContext from './MasterContext.js';
 import { useBank, useBankUpdate } from'./BankContext.js';
 
 
 function Bank(){
   
-  const kitOneIsActive = useBank();
-  const toggleKit = useBankUpdate();
+  //const kitOneIsActive = useBank();
+  //const toggleKit = useBankUpdate();
   
+  const { Bank, BankUpdate } = useContext(MasterContext);
+  const [kitOneIsActive, setOtherKitActive] = Bank;
+  const toggleKit = BankUpdate;
 
   return (
   

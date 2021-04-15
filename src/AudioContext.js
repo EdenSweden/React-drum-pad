@@ -44,7 +44,6 @@ export default function AudioProvider({ children }){
 
 
     const handleAudioClick = (e) => {
-        /*maybe memoize this and export it for volume control/cutoff w/ power shutoff?*/
         //console.log(e.target.children[0]);
         //console.log(e.target.children[0].paused);
         const clickedSound = e.target.children[0].attributes[0].nodeValue;
