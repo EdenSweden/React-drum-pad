@@ -5,21 +5,22 @@ import './Buttons.css';
 //import { useVolume } from './VolumeContext.js';
 //import { useClickedAudio, useTappedAudio, useAudioRef, useButtonRef } from './AudioContext.js';
 import Volume from './Volume.js';
-import MasterContext from './MasterContext.js';
+import MasterProvider from './MasterContext.js';
 
 
 function Buttons(){
 
-const audioRef = useRef([]) ;
+const audioRef = useRef([]);
 const buttonRef = useRef([]);  
 
-const { Power, Playing, UpdatePlaying, Volume, UpdateVolume, DrumKitData } = useContext(MasterContext);
-const [isPowerOn, setPower] = Power;
+/*const { Power, Playing, UpdatePlaying, Volume, UpdateVolume, DrumKitData } = useMasterContext({});*/
+/*const {drumKitData, currentVolume, toggleIsPlaying, isPowerOn} = useMasterContext({});*/
+/*const [isPowerOn, setPower] = Power;
 const [isPlaying, toggleIsPlaying] = Playing;
 const togglePlaying = UpdatePlaying;
 const [currentVolume, setCurrentVolume] = Volume;
 const changeVolume = UpdateVolume;
-const drumKitData = DrumKitData;
+const drumKitData = DrumKitData;*/
 //access the audio files and buttons from AudioContext.js //CHANGE THIS
 //const audioRef = useAudioRef();
 //const buttonRef = useButtonRef();
