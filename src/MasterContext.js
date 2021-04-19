@@ -116,9 +116,11 @@ function changeVolume(e){
 
 const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, isPlaying: false });
 
+/*these functions below may be redundant, as they are declared in the reducer function and are called on the event listeners in components.*/
 //keep these functions here or migrate them to files of corresponding components?
+/*do I declare payload here, or when calling dispatch on the TOGGLE_POWER action, or both?*/
 function handleTogglePower(){
-    dispatch({type: ACTIONS.TOGGLE_POWER})
+    dispatch({type: ACTIONS.TOGGLE_POWER, payload: state.isPowerOn})
 }
 
 function handleVolumeChange(){
