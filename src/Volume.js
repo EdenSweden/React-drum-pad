@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import './Volume.css';
 //import { useVolume, useUpdateVolume } from './VolumeContext.js';
-import { DispatchContext, GlobalStateContext } from './MasterContext';
+import { ACTIONS, DispatchContext, GlobalStateContext } from './MasterContext';
 
 
 

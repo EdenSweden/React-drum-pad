@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Power.css';
 /*import { library } from '@fortawesome/fontawesome-svg-core';*/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,7 +20,7 @@ const togglePower = usePowerToggle();*/
 
     return (
         <div id="power">
-            <button className={isPowerOn ? "power-on" : "power-off"} id="power-button" onClick={()=> dispatch({type: ACTIONS.TOGGLE_POWER, payload: state.isPowerOn})}>
+            <button className={state.isPowerOn ? "power-on" : "power-off"} id="power-button" onClick={()=> dispatch({type: ACTIONS.TOGGLE_POWER, payload: state.isPowerOn})}>
               <FontAwesomeIcon icon={faPowerOff} aria-hidden="true" />
             </button>
         </div>
