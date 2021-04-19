@@ -4,14 +4,17 @@ import './Buttons.css';
 //import { usePower } from './PowerButtonContext.js';
 //import { useVolume } from './VolumeContext.js';
 //import { useClickedAudio, useTappedAudio, useAudioRef, useButtonRef } from './AudioContext.js';
-import Volume from './Volume.js';
-import MasterProvider from './MasterContext.js';
+//import Volume from './Volume.js';
+import { ACTIONS, DispatchContext, GlobalStateContext, useAudioRef, useButtonRef, drumKitData } from './MasterContext.js';
 
 
 function Buttons(){
 
-const audioRef = useRef([]);
-const buttonRef = useRef([]);  
+const state = React.useContext(GlobalStateContext);
+const dispatch = React.useContext(DispatchContext);
+
+/*const audioRef = useRef([]);
+const buttonRef = useRef([]);*/  
 
 /*const { Power, Playing, UpdatePlaying, Volume, UpdateVolume, DrumKitData } = useMasterContext({});*/
 /*const {drumKitData, currentVolume, toggleIsPlaying, isPowerOn} = useMasterContext({});*/
@@ -25,7 +28,7 @@ const drumKitData = DrumKitData;*/
 //const audioRef = useAudioRef();
 //const buttonRef = useButtonRef();
 
-const handleAudioClick = (e) => {
+/*const handleAudioClick = (e) => {
     //console.log(e.target.children[0]);
     //console.log(e.target.children[0].paused);
     const clickedSound = e.target.children[0].attributes[0].nodeValue;
@@ -35,7 +38,7 @@ const handleAudioClick = (e) => {
             //audioRef.current[i].volume = currentVolume;
             console.log("currentVolume value: " + currentVolume);
             /*currentVolume above is undefined because AudioContext is the parent of VolumeContext. Maybe make a single context file with all everything?*/
-            console.log("volume: "+ audioRef.current[i].volume);
+            /*console.log("volume: "+ audioRef.current[i].volume);
             audioRef.current[i].play();
             toggleIsPlaying(true);
             //console.log(isPlaying);
@@ -57,12 +60,12 @@ const handleAudioClick = (e) => {
             }*/
             //console.log(audioRef.current[i]);
             //return audioRef.current[i] so it can be exported?
-        }
+        /*}
         
     }
-};
+};*/
 
-const handleAudioKeyDown = (e) => {
+/*const handleAudioKeyDown = (e) => {
     for(let i = 0; i < drumKitData.buttonList.length; i++){
         if(e.keyCode === drumKitData.buttonList[i].keyCode){
             buttonRef.current[i].style.backgroundColor = 'rgb(0, 230, 0)';
@@ -91,13 +94,11 @@ const handleAudioKeyDown = (e) => {
 
             //audioRef.current[i].play();
             //i = drumKitData.buttonList.length;
-        }
+        /*}
     }
     
-}    
+}*/   
 
-
-//access audio click/keydown functions from AudioContext.js //CHANGE THIS
 //const handleAudioClick = useClickedAudio();
 //const handleAudioKeyDown = useTappedAudio();
 
@@ -119,9 +120,9 @@ function buttonExit(e){
 
 useEffect(() => {
 
-    window.addEventListener('keydown', isPowerOn ? handleAudioKeyDown : null);
+    window.addEventListener('keydown', state.isPowerOn ? ()=>dispatch({type: ACTIONS.TAP_KEY, payload: drumKitData}) : null);
 
-    return () => {window.removeEventListener('keydown', handleAudioKeyDown);
+    return () => {window.removeEventListener('keydown', ()=>dispatch({type: ACTIONS.TAP_KEY, payload: drumKitData}));
 };
 });
 
@@ -186,8 +187,8 @@ function handleKeyUp(){
 return(
 
 <div id="button-container">
-    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={isPowerOn ? handleAudioClick : null} onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()} onMouseOver={isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
-        <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} preload="metadata" />
+    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> useButtonRef.current.push(dpad)} onClick={state.isPowerOn ? ()=>dispatch({type: ACTIONS.CLICK_PAD, payload: drumKitData}) : null} onKeyUp={()=>useButtonRef.current[index].blur()} onMouseUp={()=>useButtonRef.current[index].blur()} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
+        <audio ref={(ele) => useAudioRef.current.push(ele)} src={btn.url} preload="metadata" />
     </button>)}
 </div>
 )

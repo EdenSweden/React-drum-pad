@@ -4,7 +4,7 @@ import './Power.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 //import { usePower, usePowerToggle } from './PowerButtonContext.js';
-import { DispatchContext, GlobalStateContext } from './MasterContext';
+import { ACTIONS, DispatchContext, GlobalStateContext } from './MasterContext';
 
 
 

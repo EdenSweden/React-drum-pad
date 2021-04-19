@@ -1,12 +1,18 @@
 import React, { useRef, useEffect } from 'react';
 import './Volume.css';
-import { useVolume, useUpdateVolume } from './VolumeContext.js';
+//import { useVolume, useUpdateVolume } from './VolumeContext.js';
+import { DispatchContext, GlobalStateContext } from './MasterContext';
+
+
 
 
 function Volume(){
 
-    const currentVolume = useVolume();
-    const changeVolume = useUpdateVolume();
+const dispatch = useContext(DispatchContext);
+const state = useContext(GlobalStateContext);
+
+    /*const currentVolume = useVolume();
+    const changeVolume = useUpdateVolume();*/
 
     //const volumeRef = useRef();
 
@@ -28,8 +34,8 @@ function Volume(){
             type="range"
             min="0"
             max="100"
-            value={currentVolume * 100}
-            onInput={changeVolume}
+            value={state.currentVolume} // will this make it unchangeable?
+            onInput={()=> dispatch({type: ACTIONS.CHANGE_VOLUME, payload: state.currentVolume})}
             //ref={volumeRef}
           ></input>
         </div>
