@@ -5,7 +5,7 @@ import './Buttons.css';
 //import { useVolume } from './VolumeContext.js';
 //import { useClickedAudio, useTappedAudio, useAudioRef, useButtonRef } from './AudioContext.js';
 //import Volume from './Volume.js';
-import { ACTIONS, DispatchContext, GlobalStateContext, useAudioRef, useButtonRef, drumKitData } from './MasterContext.js';
+import { ACTIONS, DispatchContext, GlobalStateContext, useAudioRef, useButtonRef } from './MasterContext.js';
 
 
 function Buttons(){
