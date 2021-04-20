@@ -51,7 +51,7 @@ export function changeVolume(e) {
 export const GlobalStateContext = React.createContext();
 export const DispatchContext = React.createContext();
 
-export const drumKitData = { displayText: state.kitOneIsActive ? "Heater Kit" : "Smooth Piano Kit", buttonList: state.kitOneIsActive ? [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"}, {letter: "W", keyCode: 87, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3"}, {letter: "E", keyCode: 69, url:"https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3"}, {letter: "A", keyCode: 65, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3"}, {letter: "S", keyCode: 83, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3"}, {letter: "D", keyCode: 68, url: "https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3"}, {letter: "Z", keyCode: 90, url: "https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3"}, {letter: "X", keyCode: 88, url: "https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3"}, {letter: "C", keyCode: 67, url: "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3"}] : [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3"}, {letter: "W", keyCode: 87, url: "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3"}, {letter: "E", keyCode: 69, url:"https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3"}, {letter: "A", keyCode: 65, url: "https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3"}, {letter: "S", keyCode: 83, url: "https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3"}, {letter: "D", keyCode: 68, url: "https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3"}, {letter: "Z", keyCode: 90, url: "https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3"}, {letter: "X", keyCode: 88, url: "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3"}, {letter: "C", keyCode: 67, url: "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"}] };
+export const drumKitData = { displayText: GlobalStateContext.state.kitOneIsActive ? "Heater Kit" : "Smooth Piano Kit", buttonList: GlobalStateContext.state.kitOneIsActive ? [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"}, {letter: "W", keyCode: 87, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3"}, {letter: "E", keyCode: 69, url:"https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3"}, {letter: "A", keyCode: 65, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3"}, {letter: "S", keyCode: 83, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3"}, {letter: "D", keyCode: 68, url: "https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3"}, {letter: "Z", keyCode: 90, url: "https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3"}, {letter: "X", keyCode: 88, url: "https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3"}, {letter: "C", keyCode: 67, url: "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3"}] : [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3"}, {letter: "W", keyCode: 87, url: "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3"}, {letter: "E", keyCode: 69, url:"https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3"}, {letter: "A", keyCode: 65, url: "https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3"}, {letter: "S", keyCode: 83, url: "https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3"}, {letter: "D", keyCode: 68, url: "https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3"}, {letter: "Z", keyCode: 90, url: "https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3"}, {letter: "X", keyCode: 88, url: "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3"}, {letter: "C", keyCode: 67, url: "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"}] };
 
 export const ACTIONS = {
     TOGGLE_POWER: "togglePower",
@@ -77,30 +77,30 @@ function handleAudioClick(e) {
     //console.log(e.target.children[0].paused);
     const clickedSound = e.target.children[0].attributes[0].nodeValue;
     for(let i = 0; i < drumKitData.buttonList.length; i++){
-        if(clickedSound === audioRef.current[i].src){
+        if(clickedSound === useAudioRef.current[i].src){
             //This is where your bug is:
             //audioRef.current[i].volume = currentVolume;
-            console.log("currentVolume value: " + currentVolume);
+            console.log("currentVolume value: " + GlobalStateContext.state.currentVolume);
             /*currentVolume above is undefined because AudioContext is the parent of VolumeContext. Maybe make a single context file with all everything?*/
-            console.log("volume: "+ audioRef.current[i].volume);
-            audioRef.current[i].play();
+            console.log("volume: "+ useAudioRef.current[i].volume);
+            useAudioRef.current[i].play();
             toggleIsPlaying(true);
             //console.log(isPlaying);
             //on another click
-            if (!audioRef.current[i].paused) {
+            if (!useAudioRef.current[i].paused) {
               toggleIsPlaying(true);
               //console.log(isPlaying);  
-              audioRef.current[i].currentTime = 0;
-                audioRef.current[i].play();
+              useAudioRef.current[i].currentTime = 0;
+                useAudioRef.current[i].play();
             }
 
-            else if (audioRef.current[i].paused) {
+            else if (useAudioRef.current[i].paused) {
                 toggleIsPlaying(false);
                 //console.log(isPlaying);
             }
-            if(!isPowerOn){
-                audioRef.current[i].pause();
-                audioRef.current[i].currentTime = 0;
+            if(!GlobalStateContext.state.isPowerOn){
+                useAudioRef.current[i].pause();
+                useAudioRef.current[i].currentTime = 0;
             }
         }
         
@@ -110,22 +110,22 @@ function handleAudioClick(e) {
 function handleAudioKeyDown(e) {
     for(let i = 0; i < drumKitData.buttonList.length; i++){
         if(e.keyCode === drumKitData.buttonList[i].keyCode){
-            buttonRef.current[i].style.backgroundColor = 'rgb(0, 230, 0)';
-            const currentSound = audioRef.current[i];
+            useButtonRef.current[i].style.backgroundColor = 'rgb(0, 230, 0)';
+            const currentSound = useAudioRef.current[i];
             //currentSound.volume = currentVolume;
             currentSound.play();
             //on another tap
-            if (!audioRef.current[i].paused) {
+            if (!useAudioRef.current[i].paused) {
                 toggleIsPlaying(true);
                 //audioRef.current[i].pause();
-                audioRef.current[i].currentTime = 0;
-                audioRef.current[i].play();
+                useAudioRef.current[i].currentTime = 0;
+                useAudioRef.current[i].play();
             }
-            else if(audioRef.current[i].paused){
+            else if(useAudioRef.current[i].paused){
                 toggleIsPlaying(false);
             }
-            window.addEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
-            return window.removeEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
+            window.addEventListener("keyup", ()=>useButtonRef.current[i].style.backgroundColor = "gray");
+            return window.removeEventListener("keyup", ()=>useButtonRef.current[i].style.backgroundColor = "gray");
             
             
             //change this?
@@ -153,16 +153,16 @@ function changeVolume(e) {
 //is the ...state destructuring necessary in the reducer function?
 function reducer(state, action){
     switch(action.type) {
-        case TOGGLE_POWER:
+        case ACTIONS.TOGGLE_POWER:
         return {...state, isPowerOn: !isPowerOn, isPlaying: false }
-        case CHANGE_VOLUME:
+        case ACTIONS.CHANGE_VOLUME:
         return {...state, currentVolume: changeVolume()} //may need to test this
-        case TOGGLE_BANK:
+        case ACTIONS.TOGGLE_BANK:
         return {...state, kitOneIsActive: !kitOneIsActive}
-        case TAP-KEY:
+        case ACTIONS.TAP_KEY:
         handleAudioKeyDown();
         return {...state, isPlaying: false}//should set isPlaying to false AFTER playing is complete.
-        case CLICK-PAD:
+        case ACTIONS.CLICK_PAD:
         handleAudioClick();
         return {...state, isPlaying: false}//should set isPlaying to false AFTER playing is complete.
         default:
