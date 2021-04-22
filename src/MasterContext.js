@@ -45,14 +45,14 @@ function reducer(state, action){
         case ACTIONS.TOGGLE_POWER:
         return {...state, isPowerOn: !state.isPowerOn, isPlaying: false }
         case ACTIONS.CHANGE_VOLUME:
-        return {...state, currentVolume: changeVolume()} //may need to test this
+        return {...state, currentVolume: changeVolume(action.payload)} //may need to test this
         case ACTIONS.TOGGLE_BANK:
         return {...state, kitOneIsActive: !state.kitOneIsActive}
         case ACTIONS.TAP_KEY:
-        handleAudioKeyDown();
+        handleAudioKeyDown(action.payload);
         return {...state, isPlaying: false}//should set isPlaying to false AFTER playing is complete.
         case ACTIONS.CLICK_PAD:
-        handleAudioClick();
+        handleAudioClick(action.payload);
         return {...state, isPlaying: false}//should set isPlaying to false AFTER playing is complete.
         case ACTIONS.IS_PLAYING:
             return {...state, isPlaying: true}
@@ -62,6 +62,15 @@ function reducer(state, action){
         return state;
     }
 }
+
+function changeVolume(e){
+    console.log(e.target.value / 100);
+    return e.target.value / 100;
+    //if volume is adjusted while sound is playing:
+    /*if (state.isPlaying) {    
+    changeVolume(e.target.value / 100);
+    }*/
+};
 
 function handleAudioClick(e) {
     //console.log(e.target.children[0]);
@@ -130,17 +139,6 @@ function handleAudioKeyDown(e) {
     }
     
 }
-
-function changeVolume(e) {
-    console.log(e.target.value / 100);
-    return e.target.value / 100;
-    //if volume is adjusted while sound is playing:
-    /*if (state.isPlaying) {    
-    changeVolume(e.target.value / 100);
-    }*/
-};
-
-
 
 return(
 /*<IsPlayingContext.Provider value={isPlaying}>
