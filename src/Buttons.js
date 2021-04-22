@@ -10,8 +10,13 @@ import { ACTIONS, DispatchContext, GlobalStateContext, useAudioRef, useButtonRef
 
 function Buttons(){
 
-const state = React.useContext(GlobalStateContext);
-const dispatch = React.useContext(DispatchContext);
+const globalState = useContext(GlobalStateContext);
+const dispatch = useContext(DispatchContext);
+const state = globalState.state;
+const drumKitData = globalState.drumKitData;
+const audioRef = useAudioRef();
+const buttonRef = useButtonRef();
+
 
 /*const audioRef = useRef([]);
 const buttonRef = useRef([]);*/  
@@ -122,7 +127,7 @@ useEffect(() => {
 
     window.addEventListener('keydown', state.isPowerOn ? ()=>dispatch({type: ACTIONS.TAP_KEY, payload: drumKitData}) : null);
 
-    return () => {window.removeEventListener('keydown', ()=>dispatch({type: ACTIONS.TAP_KEY, payload: drumKitData}));
+    return () => {window.removeEventListener('keydown', ()=>dispatch({type: ACTIONS.TAP_KEY, payload: state.drumKitData}));
 };
 });
 
@@ -187,8 +192,8 @@ function handleKeyUp(){
 return(
 
 <div id="button-container">
-    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> useButtonRef.current.push(dpad)} onClick={state.isPowerOn ? ()=>dispatch({type: ACTIONS.CLICK_PAD, payload: drumKitData}) : null} onKeyUp={()=>useButtonRef.current[index].blur()} onMouseUp={()=>useButtonRef.current[index].blur()} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
-        <audio ref={(ele) => useAudioRef.current.push(ele)} src={btn.url} preload="metadata" />
+    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={state.isPowerOn ? ()=>dispatch({type: ACTIONS.CLICK_PAD, payload: drumKitData}) : null} onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
+        <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} preload="metadata" />
     </button>)}
 </div>
 )

@@ -11,8 +11,9 @@ import { ACTIONS, DispatchContext, GlobalStateContext } from './MasterContext';
 
 function Power(){
 
-const dispatch = useContext(DispatchContext);
-const state = useContext(GlobalStateContext);
+  const globalState = useContext(GlobalStateContext);
+  const dispatch = useContext(DispatchContext);
+  const state = globalState.state;
 
 /*const isPowerOn = usePower();
 const togglePower = usePowerToggle();*/

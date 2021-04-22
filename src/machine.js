@@ -7,24 +7,24 @@ import PowerButtonProvider from'./PowerButtonContext.js';
 import VolumeProvider from './VolumeContext.js';
 import AudioProvider, { useClickedAudio, useTappedAudio } from './AudioContext.js';
 //import BankData, { currentBankData, BankContext } from './BankContext.js';*/
-import MasterProvider from './MasterContext.js';
+//import MasterProvider from './MasterContext.js';
 
 export default function Machine() {
 
   return (
-    <MasterProvider>
+    <div id="drum-machine">
   {/*<BankDataProvider>
     <AudioProvider>
       <PowerButtonProvider>
   <VolumeProvider>*/}
-      <div id="drum-machine">
+      
         <Buttons />
         <Controls />
-      </div>
+      
        {/*} </VolumeProvider>
       </PowerButtonProvider>
     </AudioProvider>
 </BankDataProvider>*/}
-  </MasterProvider>
-  );
+</div>
+  )
 }

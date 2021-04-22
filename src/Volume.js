@@ -6,10 +6,14 @@ import { ACTIONS, DispatchContext, GlobalStateContext } from './MasterContext';
 
 
 
-function Volume(){
+export default function Volume(){
 
-const dispatch = useContext(DispatchContext);
-const state = useContext(GlobalStateContext);
+  const globalState = useContext(GlobalStateContext);
+  const dispatch = useContext(DispatchContext);
+  const state = globalState.state;
+
+
+  //const drumKitData = globalState.drumKitData;
 
     /*const currentVolume = useVolume();
     const changeVolume = useUpdateVolume();*/
@@ -34,12 +38,11 @@ const state = useContext(GlobalStateContext);
             type="range"
             min="0"
             max="100"
-            value={state.currentVolume} // will this make it unchangeable?
-            onInput={()=> dispatch({type: ACTIONS.CHANGE_VOLUME, payload: state.currentVolume})}
+            value={state.currentVolume * 100} // will this make it unchangeable?
+            onInput={(e)=>dispatch({type: ACTIONS.CHANGE_VOLUME, payload: e})}
             //ref={volumeRef}
           ></input>
         </div>
       );
 }
 
-export default Volume;
