@@ -23,9 +23,9 @@ function buttonExit(e){
 
 useEffect(() => {
 
-    window.addEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: e/*drumKitData*/}) : null);
+    window.addEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}) : null);
 
-    return () => {window.removeEventListener('keydown', (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: e/*drumKitData*/}));
+    return () => {window.removeEventListener('keydown', (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}));
 };
 });
 
