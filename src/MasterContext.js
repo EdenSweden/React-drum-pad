@@ -83,11 +83,11 @@ function handleAudioClick([e, dispatch, ...state]) {
     //console.log(e.target.children[0]);
     //console.log(e.target.children[0].paused);
     const clickedSound = e.target.children[0].attributes[0].nodeValue;
-    console.log(clickedSound);
+    //console.log(clickedSound);
     for(let i = 0; i < drumKitData.buttonList.length; i++){
         if(clickedSound === audioRef.current[i].src){
-            console.log("currentVolume value: " + state.currentVolume);
-            console.log("volume: "+ audioRef.current[i].volume);
+            //console.log("currentVolume value: " + [...state].currentVolume);
+            //console.log("volume: "+ audioRef.current[i].volume);
             dispatch({type: ACTIONS.IS_PLAYING});
             audioRef.current[i].play();
             dispatch({type: ACTIONS.IS_NOT_PLAYING});
@@ -101,7 +101,8 @@ function handleAudioClick([e, dispatch, ...state]) {
             else if (audioRef.current[i].paused) {
                 dispatch({type: ACTIONS.IS_NOT_PLAYING})
             }
-            if(!state.isPowerOn){
+
+            if([...state].isPowerOn === false){
                 audioRef.current[i].pause();
                 audioRef.current[i].currentTime = 0;
                 dispatch({type: ACTIONS.IS_NOT_PLAYING});
