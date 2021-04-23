@@ -11,7 +11,7 @@ export default function Display(){
 
 const globalState = useContext(GlobalStateContext);
 const state = globalState.state;
-const drumKitData = globalState.drumKitData;
+const drumKitData = globalState.getDrumKitData(); //parentheses necessary?
   //const dispatch = useContext(DispatchContext);
 //const drumKitData = useDrumKitData();
 //const isPowerOn = usePower();

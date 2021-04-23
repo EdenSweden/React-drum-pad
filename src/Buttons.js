@@ -8,7 +8,7 @@ function Buttons(){
 const globalState = useContext(GlobalStateContext);
 const dispatch = useContext(DispatchContext);
 const state = globalState.state;
-const drumKitData = globalState.drumKitData;
+const drumKitData = globalState.getDrumKitData(); //parentheses necessary?
 const audioRef = useAudioRef();
 const buttonRef = useButtonRef();
 
@@ -33,7 +33,7 @@ useEffect(() => {
 return(
 
 <div id="button-container">
-    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={state.isPowerOn ? ()=>dispatch({type: ACTIONS.CLICK_PAD, payload: drumKitData}) : null} onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
+    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={state.isPowerOn ? (e)=>dispatch({type: ACTIONS.CLICK_PAD, payload: [e, dispatch, state]}) : null} onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
         <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} preload="metadata" />
     </button>)}
 </div>
