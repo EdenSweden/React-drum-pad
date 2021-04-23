@@ -111,10 +111,12 @@ function handleAudioClick([e, dispatch, ...state]) {
         
     }
 };
-
+var currentButton;
 function handleAudioKeyDown([e, dispatch,...state]) {
     for(let i = 0; i < drumKitData.buttonList.length; i++){
         if(e.keyCode === drumKitData.buttonList[i].keyCode){
+            currentButton = buttonRef.current[i];
+            //console.log(buttonRef.current[i]);
             buttonRef.current[i].style.backgroundColor = 'rgb(0, 230, 0)';
             const currentSound = audioRef.current[i];
             //currentSound.volume = currentVolume;
@@ -133,8 +135,8 @@ function handleAudioKeyDown([e, dispatch,...state]) {
                 dispatch({type: ACTIONS.IS_NOT_PLAYING});
             }
             //may need to use useEffect on the component so this doesn't cause issues
-            window.addEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
-            return window.removeEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
+            /*window.addEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
+            return window.removeEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");*/
             
             
             //change this?
@@ -145,6 +147,7 @@ function handleAudioKeyDown([e, dispatch,...state]) {
 
             //useAudioRef.current[i].play();
             //i = drumKitData.buttonList.length;
+            return currentButton;
         }
     }
     
