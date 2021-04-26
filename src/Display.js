@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './Display.css';
-import { GlobalStateContext } from './MasterContext';
+import { GlobalStateContext, DrumKitDataContext } from './MasterContext';
 //import {useDrumKitData} from './BankContext.js';
 //import { usePower } from './PowerButtonContext.js';
 
@@ -9,9 +9,8 @@ import { GlobalStateContext } from './MasterContext';
 
 export default function Display(){
 
-const globalState = useContext(GlobalStateContext);
-const state = globalState.state;
-const drumKitData = globalState.getDrumKitData(); //parentheses necessary?
+const state = useContext(GlobalStateContext);
+const drumKitData = useContext(DrumKitDataContext); //parentheses necessary?
   //const dispatch = useContext(DispatchContext);
 //const drumKitData = useDrumKitData();
 //const isPowerOn = usePower();

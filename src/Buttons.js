@@ -1,27 +1,61 @@
 import React, { useEffect, useContext } from 'react';
 import './Buttons.css';
-import { ACTIONS, DispatchContext, GlobalStateContext, useAudioRef, useButtonRef } from './MasterContext.js';
+import { ACTIONS, DispatchContext, GlobalStateContext, DrumKitDataContext, useAudioRef, useButtonRef } from './MasterContext.js';
 
 
 function Buttons(){
 
-const globalState = useContext(GlobalStateContext);
+const state = useContext(GlobalStateContext);
 const dispatch = useContext(DispatchContext);
-const state = globalState.state;
-const drumKitData = globalState.getDrumKitData(); //parentheses necessary?
+const drumKitData = useContext(DrumKitDataContext); //parentheses necessary?
 const audioRef = useAudioRef();
 const buttonRef = useButtonRef();
 
-function buttonHover(e){
+    function buttonHover(e){
     
     return e.target.style.backgroundColor = "rgb(0, 230, 0)";
     
-}
-//this makes it permanently stay gray, even after keydown again. Fix this
-function buttonExit(e){
+    }
+    //this makes it permanently stay gray, even after keydown again. Fix this
+    function buttonExit(e){
     
     return e.target.style.backgroundColor = "gray";
-}
+    }
+
+    function handleAudioClick(e) {
+    //console.log(e.target.children[0].attributes[0].nodeValue);
+    //console.log(e.target.children[0]);
+    //console.log(e.target.children[0].paused);
+    const clickedSound = e.target.children[0].attributes[0].nodeValue;
+    //console.log(clickedSound);
+    for(let i = 0; i < drumKitData.buttonList.length; i++){
+        if(clickedSound === audioRef.current[i].src){
+            //console.log("currentVolume value: " + [...state].currentVolume);
+            //console.log("volume: "+ audioRef.current[i].volume);
+            dispatch({type: ACTIONS.IS_PLAYING});
+            audioRef.current[i].play();
+            dispatch({type: ACTIONS.IS_NOT_PLAYING});
+            //on another click
+            if (!audioRef.current[i].paused) {
+              dispatch({type: ACTIONS.IS_PLAYING}); 
+              audioRef.current[i].currentTime = 0;
+                audioRef.current[i].play();
+            }
+
+            else if (audioRef.current[i].paused) {
+                dispatch({type: ACTIONS.IS_NOT_PLAYING})
+            }
+
+            if(state.isPowerOn === false){
+                audioRef.current[i].pause();
+                audioRef.current[i].currentTime = 0;
+                dispatch({type: ACTIONS.IS_NOT_PLAYING});
+            }
+        }
+        
+    }
+    dispatch({type: ACTIONS.CLICK_PAD});
+};
 
 /*this prints multiple different copies of the state to the console. Probably the bug*/
 useEffect(() => {
@@ -43,7 +77,7 @@ useEffect(() => {
 return(
 
 <div id="button-container">
-    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={state.isPowerOn ? (e)=>dispatch({type: ACTIONS.CLICK_PAD, payload: [e, dispatch, state]}) : null} /*onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()}*/ onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
+    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={state.isPowerOn ? handleAudioClick  : null} /*onKeyUp={()=>buttonRef.current[index].blur()} onMouseUp={()=>buttonRef.current[index].blur()}*/ onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
         <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} preload="metadata" />
     </button>)}
 </div>
