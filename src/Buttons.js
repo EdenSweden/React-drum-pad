@@ -13,21 +13,25 @@ const audioRef = useAudioRef();
 const buttonRef = useButtonRef();
 
 function buttonHover(e){
+    
     return e.target.style.backgroundColor = "rgb(0, 230, 0)";
+    
 }
 //this makes it permanently stay gray, even after keydown again. Fix this
 function buttonExit(e){
+    
     return e.target.style.backgroundColor = "gray";
 }
 
+/*this prints multiple different copies of the state to the console. Probably the bug*/
 useEffect(() => {
-
-    window.addEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}) : null);
+    window.addEventListener('keydown', ()=>console.log(state));
+    //window.addEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}) : null);
     
-
-    return () => {window.removeEventListener('keydown', (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}));
-};
-}, []);
+    return ()=> {window.removeEventListener('keydown', ()=>console.log(state))};
+    //return () => {window.removeEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}) : null);
+//};
+}, [state.isPowerOn]);
 
 /*useEffect(() => {
     /*window.addEventListener("keyup", ()=> buttonRef.current[i].style.backgroundColor = "gray");*/

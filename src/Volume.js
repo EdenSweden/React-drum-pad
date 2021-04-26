@@ -1,16 +1,27 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import './Volume.css';
 //import { useVolume, useUpdateVolume } from './VolumeContext.js';
-import { ACTIONS, DispatchContext, GlobalStateContext } from './MasterContext';
+import { ACTIONS, DispatchContext } from './MasterContext';
 
 
 
 
 export default function Volume(){
 
-  const globalState = useContext(GlobalStateContext);
+  //const globalState = useContext(GlobalStateContext);
   const dispatch = useContext(DispatchContext);
-  const state = globalState.state;
+  //const state = globalState.state;
+
+  function changeVolume(e){
+
+    const currentVolume = e.target.value / 100;
+    //console.log(currentVolume);
+    dispatch({type: ACTIONS.CHANGE_VOLUME, payload: currentVolume})
+    //if volume is adjusted while sound is playing:
+    /*if (state.isPlaying) {    
+    changeVolume(e.target.value / 100);
+    }*/
+};
 
     return (
         <div id="volume">
@@ -22,8 +33,7 @@ export default function Volume(){
             min="0"
             max="100"
             /*value={state.currentVolume * 100} // will this make it unchangeable?*/
-            onInput={(e)=>dispatch({type: ACTIONS.CHANGE_VOLUME, payload: e})}
-            //ref={volumeRef}
+            onInput={changeVolume}
           ></input>
         </div>
       );
