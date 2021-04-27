@@ -7,9 +7,8 @@ import { ACTIONS, DispatchContext, GlobalStateContext } from './MasterContext';
 
 function Bank(){
   
-const globalState = useContext(GlobalStateContext);
+const state = useContext(GlobalStateContext);
 const dispatch = useContext(DispatchContext);
-const state = globalState.state;
 //const drumKitData = globalState.drumKitData;
   //const kitOneIsActive = useBank();
   //const toggleKit = useBankUpdate();
