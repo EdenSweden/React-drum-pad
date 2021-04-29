@@ -78,10 +78,12 @@ function handleAudioKeyDown(e) {
             //currentSound.volume = currentVolume;
            //dispatch({type: ACTIONS.IS_PLAYING});
             currentSound.play();
-            dispatch({type: ACTIONS.CHANGE_TIMES_PLAYED});
+            //dispatch({type: ACTIONS.CHANGE_TIMES_PLAYED});
             //dispatch({type: ACTIONS.IS_NOT_PLAYING});
             //on another tap
-            if (!currentSound.paused) {
+            //create useEffect?
+            currentSound.onended = () => {console.log("ended")};
+            if (!currentSound.ended) {
                 //dispatch({type: ACTIONS.IS_PLAYING})
                 //audioRef.current[i].pause();
                 currentSound.currentTime = 0;
@@ -128,7 +130,8 @@ useEffect(() => {
 
 function makeButtonGray(){
     if(state.buttonRefIndex >= 0 && state.buttonRefIndex < 10){
-        console.log(state.timesPlayed);
+        //console.log(state.timesPlayed);
+        //console.log(audioRef.current[state.buttonRefIndex].paused);
     return buttonRef.current[state.buttonRefIndex].style.backgroundColor = "gray";
     } else {
         return null;
