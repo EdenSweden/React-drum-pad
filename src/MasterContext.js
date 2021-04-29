@@ -12,8 +12,8 @@ export const ACTIONS = {
     CLICK_PAD: "clickPad",
     IS_PLAYING: "isPlaying",
     IS_NOT_PLAYING: "isNotPlaying",
-    CHANGE_BUTTON_COLOR: "changeButtonColor",
-    CHANGE_BUTTON_INDEX: "changeButtonIndex"
+    CHANGE_BUTTON_INDEX: "changeButtonIndex",
+    CHANGE_TIMES_PLAYED: "changeTimesPlayed"
 }
 
 //custom hooks to export refs to Buttons & other components
@@ -33,7 +33,7 @@ export function useButtonRef(){
 export default function MasterProvider( { children } ){
     
 /*syntax: const [state,dispatch] = useReducer(reducerFunction, initialStateValue)*/
-const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, isPlaying: false, currentButtonColor: "gray", buttonRefIndex: undefined});
+const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, isPlaying: false, buttonRefIndex: undefined, timesPlayed: 0});
 
 
 /*this is an impure function because it depends on state but may cause unnecessary re-renders...? Use useEffect() somewhere instead and only re-render when state.kitOneIsActive changes?*/
@@ -70,6 +70,10 @@ function reducer(state, action){
         
         case ACTIONS.CHANGE_BUTTON_INDEX:
             return {...state, buttonRefIndex: action.payload}
+
+        case ACTIONS.CHANGE_TIMES_PLAYED:
+            /*this is simply an action to use as a dependency for the useEffect makeButtonGray function in Buttons.js. BUT it seems to increment by 2. May need to debug or write console.log somewhere else*/
+            return {...state, timesPlayed: state.timesPlayed + 1}
 
         default:
         return state;

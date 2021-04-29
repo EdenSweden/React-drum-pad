@@ -64,13 +64,12 @@ but what dependency will make it run again? Maybe make separate function above i
 
 
 function handleAudioKeyDown(e) {
-
+    //the problem is, it might not change the keydown count if the prev sound isn't done playing.
     if(state.isPowerOn === true) {
     for(let i = 0; i < drumKitData.buttonList.length; i++){
         if(e.keyCode === drumKitData.buttonList[i].keyCode){
             const currentButton = buttonRef.current[i];
             dispatch({type: ACTIONS.CHANGE_BUTTON_INDEX, payload: i});
-            
             //var currentButtonColor = 'rgb(0, 230, 0)';
             /*dispatch({type: ACTIONS.CHANGE_BUTTON_COLOR, payload: currentButtonColor});*/
             currentButton.style.backgroundColor = 'rgb(0, 230, 0)';
@@ -79,27 +78,24 @@ function handleAudioKeyDown(e) {
             //currentSound.volume = currentVolume;
            //dispatch({type: ACTIONS.IS_PLAYING});
             currentSound.play();
+            dispatch({type: ACTIONS.CHANGE_TIMES_PLAYED});
             //dispatch({type: ACTIONS.IS_NOT_PLAYING});
             //on another tap
-            /*if (!currentSound.paused) {
-                dispatch({type: ACTIONS.IS_PLAYING})
+            if (!currentSound.paused) {
+                //dispatch({type: ACTIONS.IS_PLAYING})
                 //audioRef.current[i].pause();
                 currentSound.currentTime = 0;
                 currentSound.play();
-                dispatch({type: ACTIONS.IS_NOT_PLAYING})
-            }*/
+            dispatch({type: ACTIONS.CHANGE_TIMES_PLAYED});
+                //dispatch({type: ACTIONS.IS_NOT_PLAYING})
+            }
             /*else if(currentSound.paused){
                 dispatch({type: ACTIONS.IS_NOT_PLAYING});
                 /*currentButtonColor = "gray";
                 dispatch({type: ACTIONS.CHANGE_BUTTON_COLOR, payload: currentButtonColor});
                 currentButton.style.backgroundColor = state.currentButtonColor;
                 
-            }*/
-            //may need to use useEffect on the component so this doesn't cause issues
-            /*window.addEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
-            return window.removeEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");*/
-            
-            
+            }*/    
             //change this?
             /*else if(!useAudioRef.current[i].paused && !state.isPowerOn){
                 useAudioRef.current[i].pause();
@@ -129,10 +125,10 @@ useEffect(() => {
 }, [state.isPowerOn]);
 
 
-/*Q frequently gets stuck green and some others do too when playing simultaneously with others sometimes.*/
+
 function makeButtonGray(){
-    //is "return" necessary here?
-    if(state.buttonRefIndex > 0 && state.buttonRefIndex < 10){
+    if(state.buttonRefIndex >= 0 && state.buttonRefIndex < 10){
+        console.log(state.timesPlayed);
     return buttonRef.current[state.buttonRefIndex].style.backgroundColor = "gray";
     } else {
         return null;
@@ -143,7 +139,7 @@ useEffect(() => {
 
     return ()=>{window.removeEventListener("keyup", makeButtonGray)}
 
-}, [state.buttonRefIndex]);
+}, [state.timesPlayed]); /* this isn't working when the same is played multiple times or when one is played before other finishes. Maybe dispatch the IS_NOT_PLAYING or IS_PLAYING action?*/
 
 return(
 
