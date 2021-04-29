@@ -16,11 +16,14 @@ export default function Power(){
 
 /*const isPowerOn = usePower();
 const togglePower = usePowerToggle();*/
+function switchPower(){
+  dispatch({type: ACTIONS.TOGGLE_POWER});
+}
 
 
     return (
         <div id="power">
-            <button className={state.isPowerOn ? "power-on" : "power-off"} id="power-button" onClick={()=> dispatch({type: ACTIONS.TOGGLE_POWER})}>
+            <button className={state.isPowerOn ? "power-on" : "power-off"} id="power-button" onClick={switchPower}>
               <FontAwesomeIcon icon={faPowerOff} aria-hidden="true" />
             </button>
         </div>

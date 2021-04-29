@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext/*, useMemo, useCallback*/ } from 'react';
 import './Buttons.css';
 import { ACTIONS, DispatchContext, GlobalStateContext, DrumKitDataContext, useAudioRef, useButtonRef } from './MasterContext.js';
 
@@ -56,34 +56,45 @@ const buttonRef = useButtonRef();
     }
     dispatch({type: ACTIONS.CLICK_PAD});
 };
+/*use useMemo hook to cache the result of what currentButton is below? 
+but what dependency will make it run again? Maybe make separate function above it to store it in and make the return statement a useMemo statement. Then you can access the currentButton in the makeButtonGray function until a button (MAKE SURE THIS AN INCLUDE THE SAME BUTTON) is pressed again.*/
+/*const currentButton = useMemo(()=>{
+    return buttonRef.current[i];
+}, [buttonRef.current[i]])*///see if this still works if same button pressed twice
+
 
 function handleAudioKeyDown(e) {
-    console.log(state.isPowerOn);
-    //console.log(state.currentButton);
+
+    if(state.isPowerOn === true) {
     for(let i = 0; i < drumKitData.buttonList.length; i++){
         if(e.keyCode === drumKitData.buttonList[i].keyCode){
-            var currentButton = buttonRef.current[i];
-            /*this dispatch action isn't changing currentButton in the statefor some reason.*/
-            dispatch({type: ACTIONS.CHANGE_BUTTON, payload: currentButton})
-            console.log(state.currentButton);
-            //console.log(buttonRef.current[i]);
+            const currentButton = buttonRef.current[i];
+            dispatch({type: ACTIONS.CHANGE_BUTTON_INDEX, payload: i});
+            
+            //var currentButtonColor = 'rgb(0, 230, 0)';
+            /*dispatch({type: ACTIONS.CHANGE_BUTTON_COLOR, payload: currentButtonColor});*/
             currentButton.style.backgroundColor = 'rgb(0, 230, 0)';
+            //console.log(buttonRef.current[i]);
             let currentSound = audioRef.current[i];
             //currentSound.volume = currentVolume;
-           dispatch({type: ACTIONS.IS_PLAYING});
+           //dispatch({type: ACTIONS.IS_PLAYING});
             currentSound.play();
-            dispatch({type: ACTIONS.IS_NOT_PLAYING});
+            //dispatch({type: ACTIONS.IS_NOT_PLAYING});
             //on another tap
-            if (!currentSound.paused) {
+            /*if (!currentSound.paused) {
                 dispatch({type: ACTIONS.IS_PLAYING})
                 //audioRef.current[i].pause();
                 currentSound.currentTime = 0;
                 currentSound.play();
                 dispatch({type: ACTIONS.IS_NOT_PLAYING})
-            }
-            else if(currentSound.paused){
+            }*/
+            /*else if(currentSound.paused){
                 dispatch({type: ACTIONS.IS_NOT_PLAYING});
-            }
+                /*currentButtonColor = "gray";
+                dispatch({type: ACTIONS.CHANGE_BUTTON_COLOR, payload: currentButtonColor});
+                currentButton.style.backgroundColor = state.currentButtonColor;
+                
+            }*/
             //may need to use useEffect on the component so this doesn't cause issues
             /*window.addEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
             return window.removeEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");*/
@@ -97,32 +108,47 @@ function handleAudioKeyDown(e) {
 
             //useAudioRef.current[i].play();
             //i = drumKitData.buttonList.length;
+            //console.log(currentButton);
             //return currentButton;
         }
     }
+    
+} else if(state.isPowerOn === false){
+    return null;
+    }
 }
-/*this prints multiple conflicting copies of the state to the console. Probably the bug*/
+
+
 useEffect(() => {
-    window.addEventListener('keydown', state.isPowerOn ? (e)=> handleAudioKeyDown(e) : null);
+    window.addEventListener('keydown', (e)=> handleAudioKeyDown(e));
     //window.addEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}) : null);
     
-    return ()=> {window.removeEventListener('keydown', state.isPowerOn ? (e)=> handleAudioKeyDown(e) : null)};
+    return ()=> {window.removeEventListener('keydown', (e)=> handleAudioKeyDown(e))};
     //return () => {window.removeEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}) : null);
 //};
 }, [state.isPowerOn]);
 
 
+/*Q frequently gets stuck green and some others do too when playing simultaneously with others sometimes.*/
+function makeButtonGray(){
+    //is "return" necessary here?
+    if(state.buttonRefIndex > 0 && state.buttonRefIndex < 10){
+    return buttonRef.current[state.buttonRefIndex].style.backgroundColor = "gray";
+    } else {
+        return null;
+    }
+}
 useEffect(() => {
-    window.addEventListener("keyup", ()=> /*state.currentButton.style.backgroundColor = "gray"*/ console.log(state.currentButton));
+    window.addEventListener("keyup", makeButtonGray);
 
-    return () => {window.removeEventListener("keyup", ()=> console.log(state.currentButton)/*state.currentButton.style.backgroundColor= "gray"*/)}
+    return ()=>{window.removeEventListener("keyup", makeButtonGray)}
 
-}, []);
+}, [state.buttonRefIndex]);
 
 return(
 
 <div id="button-container">
-    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} onClick={state.isPowerOn ? handleAudioClick  : null} /*onKeyUp={()=>buttonRef.current[index].style.backgroundColor = "gray"}*/ /*onMouseUp={()=>buttonRef.current[index].style.backgroundColor = "gray"}*/ onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
+    {drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={(dpad)=> buttonRef.current.push(dpad)} /*style={{backgroundColor: state.currentButtonColor}}*/onClick={state.isPowerOn ? handleAudioClick  : null} /*onKeyUp={()=>console.log("keyup detected")}*/ /*onMouseUp={()=>console.log("mouseup detected")}*/ onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
         <audio ref={(ele) => audioRef.current.push(ele)} src={btn.url} preload="metadata" />
     </button>)}
 </div>
