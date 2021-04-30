@@ -67,9 +67,12 @@ function handleAudioKeyDown(e) {
     //the problem is, it might not change the keydown count if the prev sound isn't done playing.
     if(state.isPowerOn === true) {
     for(let i = 0; i < drumKitData.buttonList.length; i++){
-        console.log(buttonRef.current[i].style.backgroundColor);
+        //console.log(buttonRef.current[i].style.backgroundColor);
         if(e.keyCode === drumKitData.buttonList[i].keyCode){
             const currentButton = buttonRef.current[i];
+            //maybe make the index an array instead, since multiple sounds can play at the same time?
+            //this dispatch action is not working!
+            console.log("i: " + i);
             dispatch({type: ACTIONS.CHANGE_BUTTON_INDEX, payload: i});
             //var currentButtonColor = 'rgb(0, 230, 0)';
             /*dispatch({type: ACTIONS.CHANGE_BUTTON_COLOR, payload: currentButtonColor});*/
@@ -80,12 +83,13 @@ function handleAudioKeyDown(e) {
            //dispatch({type: ACTIONS.IS_PLAYING});
            //currentSound.onplaying = () => {console.log("playing")};
             currentSound.play();
+            console.log("state.buttonRefIndex: " + state.buttonRefIndex);
             //dispatch({type: ACTIONS.CHANGE_TIMES_PLAYED});
             //dispatch({type: ACTIONS.IS_NOT_PLAYING});
             //on another tap
             //create useEffect?
             /* problem is that if another sound is played before prev is finished, the buttonRef index doesn't match the prev sound index and the prev button stays green. */
-            currentSound.onended = makeButtonGray();/*() => currentButton.style.backgroundColor = "gray";*/
+            //currentSound.onended = makeButtonGray();/*() => currentButton.style.backgroundColor = "gray";*/
             if (!currentSound.ended) {
                 /*this will only make prevbutton gray. not previous pushed button:*/
                 //instead maybe create array of active buttons in the state
@@ -95,11 +99,11 @@ function handleAudioKeyDown(e) {
                 currentSound.currentTime = 0;
                 currentSound.play();
             dispatch({type: ACTIONS.CHANGE_TIMES_PLAYED});
-            currentSound.onended = makeButtonGray();
+            //currentSound.onended = makeButtonGray();
                 //dispatch({type: ACTIONS.IS_NOT_PLAYING})
             }
             else if(currentSound.ended){
-                makeButtonGray();
+                //makeButtonGray();
                 //dispatch({type: ACTIONS.IS_NOT_PLAYING});
                 /*currentButtonColor = "gray";
                 dispatch({type: ACTIONS.CHANGE_BUTTON_COLOR, payload: currentButtonColor});
@@ -135,7 +139,7 @@ useEffect(() => {
 }, [state.isPowerOn]);
 //test background color
 
-function makeButtonGray(){
+/*function makeButtonGray(){
     if(state.buttonRefIndex >= 0 && state.buttonRefIndex < 10){
         //console.log(state.timesPlayed);
         //console.log(audioRef.current[state.buttonRefIndex].paused);
@@ -143,13 +147,13 @@ function makeButtonGray(){
     } else {
         return null;
     }
-}
-useEffect(() => {
+}*/
+/*useEffect(() => {
     window.addEventListener("keyup", makeButtonGray);
 
     return ()=>{window.removeEventListener("keyup", makeButtonGray)}
 
-}, [state.timesPlayed]); /* this isn't working when the same is played multiple times or when one is played before other finishes. Maybe dispatch the IS_NOT_PLAYING or IS_PLAYING action?*/
+}, [state.timesPlayed]);*/ /* this isn't working when the same is played multiple times or when one is played before other finishes. Maybe dispatch the IS_NOT_PLAYING or IS_PLAYING action?*/
 
 return(
 
