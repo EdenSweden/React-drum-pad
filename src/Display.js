@@ -10,10 +10,8 @@ import { GlobalStateContext, DrumKitDataContext } from './MasterContext';
 export default function Display(){
 
 const state = useContext(GlobalStateContext);
-const drumKitData = useContext(DrumKitDataContext); //parentheses necessary?
-  //const dispatch = useContext(DispatchContext);
-//const drumKitData = useDrumKitData();
-//const isPowerOn = usePower();
+const drumKitData = useContext(DrumKitDataContext);
+
 
 
 return ( 
