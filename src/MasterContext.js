@@ -18,16 +18,16 @@ export const ACTIONS = {
 }
 
 //custom hooks to export refs to Buttons & other components
-var audioRef;
+
 export function useAudioRef(){
-    audioRef = useRef([]);
-    return audioRef;
+    const audioRef = useRef([]);
+    return audioRef.current;
 }
 
-var buttonRef;
+
 export function useButtonRef(){
-    buttonRef = useRef([]);
-    return buttonRef;
+    const buttonRef = useRef([]);
+    return buttonRef.current;
 }
 
 

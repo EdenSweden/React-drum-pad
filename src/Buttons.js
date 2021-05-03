@@ -7,13 +7,16 @@ function Buttons(){
 
 const state = useContext(GlobalStateContext);
 const dispatch = useContext(DispatchContext);
-const buttonRef = useButtonRef();
-const audioRef = useAudioRef();
+const [...buttonRefArray] = useButtonRef();
+const [...audioRefArray] = useAudioRef();
+
+
+
 
 const [buttonIndex, setButtonIndex] = useState([]);
 
     function buttonHover(e){
-;
+ 
     return e.target.style.backgroundColor = "rgb(0, 230, 0)";
     
     }
@@ -30,44 +33,50 @@ const [buttonIndex, setButtonIndex] = useState([]);
     const clickedSound = e.target.children[0].attributes[0].nodeValue;
     //console.log(clickedSound);
     for(let i = 0; i < state.drumKitData.buttonList.length; i++){
-        if(clickedSound === audioRef.current[i].src){
-            audioRef.current[i].volume = state.currentVolume;
+        if(clickedSound === audioRefArray[i].src/*audioRef.current[i].src*/){
+            audioRefArray[i].volume = state.currentVolume;
+            //audioRef.current[i].volume = state.currentVolume;
             //console.log("audioRef volume: " + audioRef.current[i].volume);
             //console.log("state volume: " + state.currentVolume);
             //console.log("currentVolume value: " + [...state].currentVolume);
             //console.log("volume: "+ audioRef.current[i].volume);
             //dispatch({type: ACTIONS.IS_PLAYING});
-            audioRef.current[i].play();
+            audioRefArray[i].play();
+            //audioRef.current[i].play();
             //dispatch({type: ACTIONS.IS_NOT_PLAYING});
             //on another click
-            if (!audioRef.current[i].paused) {
+            if (/*!audioRef.current[i]*/!audioRefArray[i].paused) {
               //dispatch({type: ACTIONS.IS_PLAYING}); 
-              audioRef.current[i].currentTime = 0;
-                audioRef.current[i].play();
+              audioRefArray[i].currentTime = 0;
+              //audioRef.current[i].currentTime = 0;
+               audioRefArray[i].play(); 
+              //audioRef.current[i].play();
             }
 
             /*else if (audioRef.current[i].paused) {
                 dispatch({type: ACTIONS.IS_NOT_PLAYING})
             }*/
 
-            if(state.isPowerOn === false){
-                audioRef.current[i].pause();
-                audioRef.current[i].currentTime = 0;
+            /*if(state.isPowerOn === false){
+                audioRefArray[i].pause();
+                //audioRef.current[i].pause();
+                audioRefArray[i].currentTime = 0;
+                //audioRef.current[i].currentTime = 0;
                 //dispatch({type: ACTIONS.IS_NOT_PLAYING});
-            }
+            }*/
         }
         
     }
     //dispatch({type: ACTIONS.CLICK_PAD});
 };
-/*maybe don't invoke drumKitData.buttonList.length? instead say 8? Or is that not useful because it's not reproduceable?*/
+
 function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
     //the problem is, it might not change the timesPlayed if the prev sound isn't done playing.
     if(state.isPowerOn === true) {
     for(let i = 0; i < state.drumKitData.buttonList.length; i++){
         /*does this dangerously mutate an array? Will it cause problems if this function is initialized within the loop?*/
         function addButtonIndex(){
-            setButtonIndex((prevIndices) => [...prevIndices, i]);
+            setButtonIndex((...prevIndices) => [...prevIndices, i]);
             
         }
 
@@ -78,7 +87,8 @@ function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
         
         //console.log(buttonRef.current[i].style.backgroundColor);
         if(e.keyCode === state.drumKitData.buttonList[i].keyCode){
-            const currentButton = buttonRef.current[i];
+            const currentButton = buttonRefArray[i];
+            //const currentButton = buttonRef.current[i];
             
             //console.log("i: " + i);
             addButtonIndex(i);
@@ -87,7 +97,8 @@ function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
             
             //currentButton.style.backgroundColor = 'rgb(0, 230, 0)';
             //console.log(buttonRef.current[i]);
-            let currentSound = audioRef.current[i];
+            let currentSound = audioRefArray[i];
+            //let currentSound = audioRef.current[i];
             //currentSound.volume = state.currentVolume;
             //console.log(currentSound.volume);
             //currentSound.play();
@@ -137,20 +148,16 @@ function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
 /*are all the above dependencies necessary? Only the last two seem crucial because the others shouldn't change. Make sure they don't. (unless you add useEffect for drumKitData*/
 useEffect(() => {
     window.addEventListener('keydown', (e)=> handleAudioKeyDown(e));
-    //window.addEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}) : null);
+    
     
     return ()=> {window.removeEventListener('keydown', (e)=> handleAudioKeyDown(e))};
-    //return () => {window.removeEventListener('keydown', state.isPowerOn ? (e)=>dispatch({type: ACTIONS.TAP_KEY, payload: [e, dispatch, state]}) : null);
-//};
-}, [state.isPowerOn/*handleAudioKeyDown*/]);
-//is this making handleAudioKeyDown loop a ridiculous number of times?
-//test background color
 
-//may need to use an array method, since there can be multiple active indices
+}, [state.isPowerOn]);
+
 function makeButtonGray(){
     /*if(buttonRef.current[buttonIndex] >= 0 && buttonRef.current[buttonIndex] < 10){*/
-        console.log(audioRef.current.length);
-        console.log("audioRef.current: " + audioRef.current);
+        //console.log("audioRef.current.length: " + audioRef.current.length);
+        //console.log("audioRef.current: " + audioRef.current);
         console.log("audioRefArray: " + audioRefArray);
         //console.log("buttonRef.current: " + buttonRef.current[0][0]);
         /*IDEA:*///audioRef.current.filter(sound => console.log(sound.ended));
@@ -168,12 +175,11 @@ useEffect(() => {
 
 }, [state.timesPlayed, buttonIndex]);
 
-function pushButtonRef(){
-    state.drumKitData.buttonList.forEach((dpad)=>buttonRef.current.push(dpad));
-}
+//creates array of button refs
+useEffect((index)=>{
 
-const buttonRefArray = useEffect(()=>{
-    pushButtonRef();
+    state.drumKitData.buttonList.forEach((dpad)=>buttonRefArray.push(dpad[index]));
+
 }, []);
 
 //doesn't change the audioRef urls when the bank is switched. Fix this
@@ -181,16 +187,19 @@ const buttonRefArray = useEffect(()=>{
     state.drumKitData.buttonList.forEach((ele)=>audioRef.current.push(ele.url));
 }*/
 //make sure it only pushes once and resets to an empty array when bank is switched. Use ...spread syntax to not mutate original.?
-const audioRefArray = [];
-const pushAudioRef= useEffect(()=>{
+
+//creates array of audioRef links, re-running when the active kit is switched
+useEffect(()=>{
+    //maybe put if statement here so it puts the proper set of audio files in array?
+    //const audioRefArray = []; ? necessary to re-initialize the array?
     state.drumKitData.buttonList.forEach((ele)=>audioRefArray.push(ele.url));
 }, [state.kitOneIsActive, state.drumKitData]);
 
 return(
 
 <div id="button-container">
-    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={/*(dpad)=> buttonRef.current.push(dpad)*/buttonRefArray} /*style={{backgroundColor: state.currentButtonColor}}*/onClick={state.isPowerOn ? handleAudioClick  : null} /*onKeyUp={()=>console.log("keyup detected")}*/ /*onMouseUp={()=>console.log("mouseup detected")}*/ onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
-        <audio ref={/*(ele) => audioRef.current.push(ele)*/pushAudioRef} src={btn.url} preload="metadata" />
+    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={/*(dpad)=> buttonRef.current.push(dpad)*/buttonRefArray[index]} /*style={{backgroundColor: state.currentButtonColor}}*/onClick={state.isPowerOn ? handleAudioClick  : null} /*onKeyUp={()=>console.log("keyup detected")}*/ /*onMouseUp={()=>console.log("mouseup detected")}*/ onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
+        <audio ref={/*(ele) => audioRef.current.push(ele)*/audioRefArray[index]} src={btn.url} preload="metadata" />
     </button>)}
 </div>
 )
