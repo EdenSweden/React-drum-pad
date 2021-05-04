@@ -23,13 +23,6 @@ export function useAudioRef(){
     return useRef([]);
 
 }
-/*const addToAudioRef = useCallback(()=>{
-    {
-    useAudioRef.current.push(ele));
-    }
-    return useAudioRef; /* should re-initialize the ref to empty array when unmounting*/
-//}, [state.kitOneisActive, state.drumKitData])*/
-
 
 export function useButtonRef(){
     return useRef([]);
@@ -42,10 +35,11 @@ export default function MasterProvider( { children } ){
     const kit1 = { displayText: "Heater Kit", buttonList: [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"}, {letter: "W", keyCode: 87, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3"}, {letter: "E", keyCode: 69, url:"https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3"}, {letter: "A", keyCode: 65, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3"}, {letter: "S", keyCode: 83, url: "https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3"}, {letter: "D", keyCode: 68, url: "https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3"}, {letter: "Z", keyCode: 90, url: "https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3"}, {letter: "X", keyCode: 88, url: "https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3"}, {letter: "C", keyCode: 67, url: "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3"}]};
 
     const kit2 = {displayText: "Smooth Piano Kit", buttonList: [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3"}, {letter: "W", keyCode: 87, url: "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3"}, {letter: "E", keyCode: 69, url:"https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3"}, {letter: "A", keyCode: 65, url: "https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3"}, {letter: "S", keyCode: 83, url: "https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3"}, {letter: "D", keyCode: 68, url: "https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3"}, {letter: "Z", keyCode: 90, url: "https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3"}, {letter: "X", keyCode: 88, url: "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3"}, {letter: "C", keyCode: 67, url: "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"}]};
-/*syntax: const [state,dispatch] = useReducer(reducerFunction, initialStateValue)*/
-const indices = [];
 
-const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, /*isPlaying: false,*/ buttonRefIndex: [...indices], timesPlayed: 0, drumKitData: kit1  /*activeButtons: []*/});
+/*syntax: const [state,dispatch] = useReducer(reducerFunction, initialStateValue)*/
+//const indices = [];
+
+const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, /*isPlaying: false,*/ /*buttonRefIndex: [...indices],*/ timesPlayed: 0, drumKitData: kit1  /*activeButtons: []*/});
 
 
 function reducer(state, action){
@@ -74,11 +68,12 @@ function reducer(state, action){
         /*case ACTIONS.IS_NOT_PLAYING:
             return {...state, isPlaying: false}*/
         //can put multiple indices for multiple audio clips playing at once
+        //MIGRATED BUTTON INDEX TO A LOCAL USESTATE HOOK ON BUTTONS COMPONENT
         /*case ACTIONS.ADD_BUTTON_INDEX:
             //state.buttonRefIndex.push(action.payload);
-            return {...state, buttonRefIndex: action.payload}
+            return {...state, buttonRefIndex: action.payload}*/
         //do these button index changing actions mutate an array dangerously?
-        case ACTIONS.REMOVE_BUTTON_INDEX:
+        /*case ACTIONS.REMOVE_BUTTON_INDEX:
             
             return {...state, buttonRefIndex: []}*/
 

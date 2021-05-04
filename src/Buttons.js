@@ -10,17 +10,21 @@ const dispatch = useContext(DispatchContext);
 const buttonRef = useButtonRef();
 const audioRef = useAudioRef();
 
-
-
-
+ 
 const [buttonIndex, setButtonIndex] = useState([]);
+
+function addButtonIndex(newBtnIndex){
+    setButtonIndex((...prevIndex)=>[...prevIndex, newBtnIndex]);
+    console.log("buttonIndex: " + buttonIndex);
+    
+}
 
     function buttonHover(e){
  
     return e.target.style.backgroundColor = "rgb(0, 230, 0)";
     
     }
-    //this makes it permanently stay gray, even after keydown again. Fix this
+    
     function buttonExit(e){
     
     return e.target.style.backgroundColor = "gray";
@@ -33,23 +37,23 @@ const [buttonIndex, setButtonIndex] = useState([]);
     const clickedSound = e.target.children[0].attributes[0].nodeValue;
     //console.log(clickedSound);
     for(let i = 0; i < state.drumKitData.buttonList.length; i++){
-        if(clickedSound === audioRef[i].src/*audioRef.current[i].src*/){
-            audioRef[i].volume = state.currentVolume;
+        if(clickedSound === audioRef.current[i].src){
+            audioRef.current[i].volume = state.currentVolume;
             //audioRef.current[i].volume = state.currentVolume;
             //console.log("audioRef volume: " + audioRef.current[i].volume);
             //console.log("state volume: " + state.currentVolume);
             //console.log("currentVolume value: " + [...state].currentVolume);
             //console.log("volume: "+ audioRef.current[i].volume);
             //dispatch({type: ACTIONS.IS_PLAYING});
-            audioRef[i].play();
+            audioRef.current[i].play();
             //audioRef.current[i].play();
             //dispatch({type: ACTIONS.IS_NOT_PLAYING});
             //on another click
-            if (/*!audioRef.current[i]*/!audioRef[i].paused) {
+            if (/*!audioRef.current[i]*/!audioRef.current[i].paused) {
               //dispatch({type: ACTIONS.IS_PLAYING}); 
-              audioRef[i].currentTime = 0;
+              audioRef.current[i].currentTime = 0;
               //audioRef.current[i].currentTime = 0;
-               audioRef[i].play(); 
+               audioRef.current[i].play(); 
               //audioRef.current[i].play();
             }
 
@@ -58,9 +62,9 @@ const [buttonIndex, setButtonIndex] = useState([]);
             }*/
 
             /*if(state.isPowerOn === false){
-                audioRefArray[i].pause();
+                audioRef.current[i].pause();
                 //audioRef.current[i].pause();
-                audioRefArray[i].currentTime = 0;
+                audioRef.current[i].currentTime = 0;
                 //audioRef.current[i].currentTime = 0;
                 //dispatch({type: ACTIONS.IS_NOT_PLAYING});
             }*/
@@ -73,45 +77,37 @@ const [buttonIndex, setButtonIndex] = useState([]);
 function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
     //the problem is, it might not change the timesPlayed if the prev sound isn't done playing.
     if(state.isPowerOn === true) {
-    for(let i = 0; i < state.drumKitData.buttonList.length; i++){
-        /*does this dangerously mutate an array? Will it cause problems if this function is initialized within the loop?*/
-        function addButtonIndex(){
-            setButtonIndex((...prevIndices) => [...prevIndices, i]);
-            
-        }
+        for(let i = 0; i < state.drumKitData.buttonList.length; i++){
+
 
         /*function removeButtonIndex(){
             /*use filter method to make the bg-color green for all button indices that are in the array on keyup, and then empty the array*/
-            setButtonIndex([]);
+            //setButtonIndex([]);
         //}
         
         //console.log(buttonRef.current[i].style.backgroundColor);
         if(e.keyCode === state.drumKitData.buttonList[i].keyCode){
-            const currentButton = buttonRef[i];
-            //const currentButton = buttonRef.current[i];
+            const currentButton = buttonRef.current[i];
             
-            //console.log("i: " + i);
+            console.log("i: " + i);
             addButtonIndex(i);
-            //console.log("buttonIndex: " + buttonIndex);
-            //console.log("state.buttonRefIndex: " + state.buttonRefIndex);
             
-            //currentButton.style.backgroundColor = 'rgb(0, 230, 0)';
+            
+            currentButton.style.backgroundColor = 'rgb(0, 230, 0)';
             //console.log(buttonRef.current[i]);
-            let currentSound = audioRef[i];
+            let currentSound = audioRef.current[i];
             //let currentSound = audioRef.current[i];
             //currentSound.volume = state.currentVolume;
             //console.log(currentSound.volume);
-            //currentSound.play();
+            //console.log("buttonIndices: " + [...buttonIndices]);
+            currentSound.play();
             dispatch({type: ACTIONS.CHANGE_TIMES_PLAYED});
-            //on another tap
-            //create useEffect?
+            
             /* problem is that if another sound is played before prev is finished, the buttonRef index doesn't match the prev sound index and the prev button stays green. */
             //currentSound.onended = makeButtonGray();/*() => currentButton.style.backgroundColor = "gray";*/
-            //why does it add i three times?            
-            //dispatch({type: ACTIONS.ADD_BUTTON_INDEX, payload: [...previndices, i]});
-            //console.log("state.buttonRefIndex: " + state.buttonRefIndex);
             //breaks from loop
-            //return i = drumKitData.buttonList.length;
+            return i > state.drumKitData.buttonList.length;
+            //on another tap
             /*if (!currentSound.ended) {
                 /*this will only make prevbutton gray. not previous pushed button:*/
                 //instead maybe create array of active buttons in the state
@@ -152,16 +148,14 @@ useEffect(() => {
     
     return ()=> {window.removeEventListener('keydown', (e)=> handleAudioKeyDown(e))};
 
-}, [state.isPowerOn]);
+}, [state.isPowerOn, buttonIndex]);
 
-function makeButtonGray(){
+/*function makeButtonGray(e){
     /*if(buttonRef.current[buttonIndex] >= 0 && buttonRef.current[buttonIndex] < 10){*/
-        //console.log("audioRef.current.length: " + audioRef.current.length);
-        //console.log("audioRef.current: " + audioRef.current);
-        console.log("buttonRef.current.length: " + buttonRef.current.length);
-        console.log("buttonRef.current: " + buttonRef.current);
+        //console.log("buttonRef.current.length: " + buttonRef.current.length);
+        /*console.log("buttonRef.current: " + buttonRef.current);
         console.log("buttonRef.current[0]:");
-        console.dir(buttonRef.current[0]);
+        console.dir(buttonRef.current[0]); */
         //console.log("audioRef.current.length: " + audioRef.current.length);
         //console.log("audioRef.current[0]:");
         //console.dir(audioRef.current[0]);
@@ -173,14 +167,14 @@ function makeButtonGray(){
     /*} else {
         return null;
     }*/
-}
+//}
 
-useEffect(() => {
-    window.addEventListener("keyup", makeButtonGray);
+/* /*useEffect(() => {
+    window.addEventListener("keyup", (e)=>console.log("e.keyCode: " + e.keyCode/*makeButtonGray));
 
-    return ()=>{window.removeEventListener("keyup", makeButtonGray)}
+   /*  return ()=>{window.removeEventListener("keyup", (e)=>console.log("e.keyCode: " + e.keyCode/*makeButtonGray*//* ))}
 
-}, [state.timesPlayed, buttonIndex]);
+}, [state.timesPlayed, buttonIndices]); */
 
 /*useEffect((index)=>{
 
