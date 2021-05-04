@@ -77,7 +77,8 @@ function addButtonIndex(newBtnIndex){
 function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
     //the problem is, it might not change the timesPlayed if the prev sound isn't done playing.
     if(state.isPowerOn === true) {
-        for(let i = 0; i < state.drumKitData.buttonList.length; i++){
+        let i = 0;
+        while(i < state.drumKitData.buttonList.length){
 
 
         /*function removeButtonIndex(){
@@ -87,10 +88,10 @@ function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
         
         //console.log(buttonRef.current[i].style.backgroundColor);
         if(e.keyCode === state.drumKitData.buttonList[i].keyCode){
-            const currentButton = buttonRef.current[i];
+            let currentButton = buttonRef.current[i];
             
-            console.log("i: " + i);
-            addButtonIndex(i);
+            //console.log("i: " + i);
+            //addButtonIndex(i);
             
             
             currentButton.style.backgroundColor = 'rgb(0, 230, 0)';
@@ -106,7 +107,7 @@ function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
             /* problem is that if another sound is played before prev is finished, the buttonRef index doesn't match the prev sound index and the prev button stays green. */
             //currentSound.onended = makeButtonGray();/*() => currentButton.style.backgroundColor = "gray";*/
             //breaks from loop
-            return i > state.drumKitData.buttonList.length;
+            //i = state.drumKitData.buttonList.length;
             //on another tap
             /*if (!currentSound.ended) {
                 /*this will only make prevbutton gray. not previous pushed button:*/
@@ -131,7 +132,11 @@ function handleAudioKeyDown /*= useCallback(*/(e) /*=>*/ {
             //console.log(currentButton);
             //return currentButton;
             //break from loop:
-        //i = drumKitData.buttonList.length;
+            //buttonRef.current[buttonIndex].style.backgroundColor = 'gray';
+            //setButtonIndex([]);
+        i = state.drumKitData.buttonList.length;
+        } else if (e.keyCode !== state.drumKitData.buttonList[i].keyCode){
+            i++;
         }
         //i = drumKitData.buttonList.length;
     }
@@ -169,12 +174,12 @@ useEffect(() => {
     }*/
 //}
 
-/* /*useEffect(() => {
-    window.addEventListener("keyup", (e)=>console.log("e.keyCode: " + e.keyCode/*makeButtonGray));
+useEffect(() => {
+    window.addEventListener("keyup", (e)=>console.log("e.keyCode: " + e.keyCode));
 
-   /*  return ()=>{window.removeEventListener("keyup", (e)=>console.log("e.keyCode: " + e.keyCode/*makeButtonGray*//* ))}
+   return ()=>{window.removeEventListener("keyup", (e)=>console.log("e.keyCode: " + e.keyCode))}
 
-}, [state.timesPlayed, buttonIndices]); */
+}, [state.timesPlayed/*, buttonIndices*/]);
 
 /*useEffect((index)=>{
 
