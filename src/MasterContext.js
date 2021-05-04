@@ -1,4 +1,4 @@
-import React, { useRef, useReducer} from 'react';
+import React, { useRef, useReducer, useCallback} from 'react';
 
 export const GlobalStateContext = React.createContext();
 export const DispatchContext = React.createContext();
@@ -20,14 +20,20 @@ export const ACTIONS = {
 //custom hooks to export refs to Buttons & other components
 
 export function useAudioRef(){
-    const audioRef = useRef([]);
-    return audioRef.current;
+    return useRef([]);
+
 }
+/*const addToAudioRef = useCallback(()=>{
+    {
+    useAudioRef.current.push(ele));
+    }
+    return useAudioRef; /* should re-initialize the ref to empty array when unmounting*/
+//}, [state.kitOneisActive, state.drumKitData])*/
 
 
 export function useButtonRef(){
-    const buttonRef = useRef([]);
-    return buttonRef.current;
+    return useRef([]);
+
 }
 
 
