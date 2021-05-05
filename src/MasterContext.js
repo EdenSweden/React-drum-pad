@@ -39,7 +39,7 @@ export default function MasterProvider( { children } ){
 /*syntax: const [state,dispatch] = useReducer(reducerFunction, initialStateValue)*/
 //const indices = [];
 
-const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, /*isPlaying: false,*/ /*buttonRefIndex: [...indices],*/ timesPlayed: 0, drumKitData: kit1  /*activeButtons: []*/});
+const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, /*isPlaying: false,*/ /*timesPlayed: 0,*/ drumKitData: kit1});
 
 
 function reducer(state, action){
@@ -47,7 +47,7 @@ function reducer(state, action){
     switch(action.type) {
 
         case ACTIONS.TOGGLE_POWER:
-        return {...state, isPowerOn: !state.isPowerOn, isPlaying: false}
+        return {...state, isPowerOn: !state.isPowerOn/*, isPlaying: false*/}
         
         case ACTIONS.CHANGE_VOLUME:
         return {...state, currentVolume: action.payload}
@@ -68,7 +68,7 @@ function reducer(state, action){
         /*case ACTIONS.IS_NOT_PLAYING:
             return {...state, isPlaying: false}*/
             
-            return {...state, buttonRefIndex: []}
+            //return {...state, buttonRefIndex: []}
 
 
         default:

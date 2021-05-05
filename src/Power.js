@@ -14,8 +14,7 @@ export default function Power(){
   const state = useContext(GlobalStateContext);
   const dispatch = useContext(DispatchContext);
 
-/*const isPowerOn = usePower();
-const togglePower = usePowerToggle();*/
+
 function switchPower(){
   dispatch({type: ACTIONS.TOGGLE_POWER});
 }
