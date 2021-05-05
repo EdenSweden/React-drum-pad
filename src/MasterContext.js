@@ -1,4 +1,4 @@
-import React, { useRef, useReducer, useCallback} from 'react';
+import React, { useRef, useReducer } from 'react';
 
 export const GlobalStateContext = React.createContext();
 export const DispatchContext = React.createContext();
@@ -9,12 +9,9 @@ export const ACTIONS = {
     TOGGLE_BANK: "toggleBank",
     TAP_KEY: "tapKey",
     CLICK_PAD: "clickPad",
-    //IS_PLAYING: "isPlaying",
+    //UPDATE_ACTIVE_AUDIO: "updateActiveAudio"
+    IS_PLAYING: "isPlaying",
     //IS_NOT_PLAYING: "isNotPlaying",
-    //ADD_BUTTON_INDEX: "addButtonIndex",
-    //REMOVE_BUTTON_INDEX: "removeButtonIndex",
-    CHANGE_TIMES_PLAYED: "changeTimesPlayed"
-    //CHANGE_ACTIVE_BUTTONS: "changeActiveButtons"
 }
 
 //custom hooks to export refs to Buttons & other components
@@ -28,7 +25,7 @@ export function useButtonRef(){
     return useRef([]);
 
 }
-
+//maybe erase keyCodes from objects if they're not being used anywhere
 
 export default function MasterProvider( { children } ){
     
@@ -39,7 +36,7 @@ export default function MasterProvider( { children } ){
 /*syntax: const [state,dispatch] = useReducer(reducerFunction, initialStateValue)*/
 //const indices = [];
 
-const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, /*isPlaying: false,*/ /*timesPlayed: 0,*/ drumKitData: kit1});
+const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, isPlaying: false, /*timesPlayed: 0,*/ drumKitData: kit1 /*currentlyPlayingAudio: ""*/});
 
 
 function reducer(state, action){
@@ -54,6 +51,9 @@ function reducer(state, action){
         
         case ACTIONS.TOGGLE_BANK:
         return {...state, kitOneIsActive: !state.kitOneIsActive, drumKitData: state.kitOneIsActive === true ? kit2 : kit1}
+
+        /*case ACTIONS.UPDATE_ACTIVE_AUDIO:
+        return {...state, currentlyPlayingAudio: action.payload}*/
         
         /*case ACTIONS.TAP_KEY:
         return {...state, isPlaying: false}*///should set isPlaying to false AFTER playing is complete.
@@ -62,8 +62,8 @@ function reducer(state, action){
         //handleAudioClick(action.payload);
         //return {...state/*, isPlaying: false*/}/*should set isPlaying to false AFTER playing is complete. Does this cause the promise to be interrupted?*/
         
-        /*case ACTIONS.IS_PLAYING:
-            return {...state, isPlaying: true}*/
+        case ACTIONS.IS_PLAYING:
+            return {...state, isPlaying: true}
         
         /*case ACTIONS.IS_NOT_PLAYING:
             return {...state, isPlaying: false}*/

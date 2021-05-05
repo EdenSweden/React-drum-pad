@@ -26,6 +26,8 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
     function handleAudioClick(e) {
     
         function clickAudio(refIndex){
+            dispatch({type: ACTIONS.IS_PLAYING});
+            console.log(state.isPlaying);
             audioRef.current[refIndex].play();
             //on another click
             if (!audioRef.current[refIndex].paused) { 
