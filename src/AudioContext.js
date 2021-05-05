@@ -97,8 +97,6 @@ export default function AudioProvider({ children }){
                 else if(audioRef.current[i].paused){
                     toggleIsPlaying(false);
                 }
-                window.addEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
-                return window.removeEventListener("keyup", ()=>buttonRef.current[i].style.backgroundColor = "gray");
                 
                 
                 //change this?

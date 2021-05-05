@@ -67,22 +67,9 @@ function reducer(state, action){
         
         /*case ACTIONS.IS_NOT_PLAYING:
             return {...state, isPlaying: false}*/
-        //can put multiple indices for multiple audio clips playing at once
-        //MIGRATED BUTTON INDEX TO A LOCAL USESTATE HOOK ON BUTTONS COMPONENT
-        /*case ACTIONS.ADD_BUTTON_INDEX:
-            //state.buttonRefIndex.push(action.payload);
-            return {...state, buttonRefIndex: action.payload}*/
-        //do these button index changing actions mutate an array dangerously?
-        /*case ACTIONS.REMOVE_BUTTON_INDEX:
             
-            return {...state, buttonRefIndex: []}*/
+            return {...state, buttonRefIndex: []}
 
-        case ACTIONS.CHANGE_TIMES_PLAYED:
-            /*this is simply an action to use as a dependency for the useEffect makeButtonGray function in Buttons.js. BUT it seems to increment by 2. May need to debug or write console.log somewhere else*/
-            return {...state, timesPlayed: state.timesPlayed + 1}
-
-        /*case ACTIONS.CHANGE_ACTIVE_BUTTONS:
-            return {...state, activeButtons: [...action.payload]}*/
 
         default:
         return state;
