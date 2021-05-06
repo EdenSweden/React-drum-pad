@@ -14,21 +14,6 @@ const audioRef = useAudioRef();
 const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
 
 
-//custom hook to handle power switchoff during playback
-
-/*function usePowerEffect(refIndex){
-    return useEffect(()=> {
-            if(state.isPowerOn === false){
-                audioRef.current[refIndex].pause();
-                audioRef.current[refIndex].currentTime = 0;
-            } else {
-                return null;
-            }
-    }, [state.isPowerOn]);
-
-}*/
-
-
 
     function buttonHover(e){
     
@@ -70,7 +55,7 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
     function handleAudioClick(e) {
     
         function clickAudio(refIndex){
-            dispatch({type: ACTIONS.IS_PLAYING});
+            dispatch({type: ACTIONS.CHANGE_DISPLAY, payload: state.drumKitData.buttonList[refIndex].displayText})
             audioRef.current[refIndex].play();
             
             //on another click
@@ -130,6 +115,7 @@ function handleAudioKeyDown(e) {
     
     function audioTap(refIndex){
     
+        dispatch({type: ACTIONS.CHANGE_DISPLAY, payload: state.drumKitData.buttonList[refIndex].displayText})
         buttonRef.current[refIndex].style.backgroundColor = "rgb(0, 230, 0)";
         audioRef.current[refIndex].play();
             //on another tap of same key
@@ -255,7 +241,7 @@ return(
         <audio ref={/*(ele) => audioRef.current.push(ele)*/ele => audioRef.current[index] = ele} src={btn.url} preload="true" />
     </button>)}
 </div>
-)
+);
 
 }
 
