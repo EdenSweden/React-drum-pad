@@ -2,6 +2,8 @@ import React, { useEffect, useContext} from 'react';
 import './Buttons.css';
 import { ACTIONS, DispatchContext, GlobalStateContext, useAudioRef, useButtonRef } from './MasterContext.js';
 
+/*sfind way to export audioRef.current from here to volume & power, or to have it sent here and everywhere else from MasterContext*/
+
 
 function Buttons(){
 
@@ -10,6 +12,22 @@ const dispatch = useContext(DispatchContext);
 const buttonRef = useButtonRef();
 const audioRef = useAudioRef();
 const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
+
+
+//custom hook to handle power switchoff during playback
+
+/*function usePowerEffect(refIndex){
+    return useEffect(()=> {
+            if(state.isPowerOn === false){
+                audioRef.current[refIndex].pause();
+                audioRef.current[refIndex].currentTime = 0;
+            } else {
+                return null;
+            }
+    }, [state.isPowerOn]);
+
+}*/
+
 
 
     function buttonHover(e){
@@ -23,16 +41,34 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
     return e.target.style.backgroundColor = "gray";
     }
 
+    //will make the sound shut off if power shuts off
+    useEffect(()=>{
+        if (state.isPowerOn === false){
+            function stopSound(audio){
+                audio.pause();
+                audio.currentTime = 0;
+            }
+            var activeAudio = audioRef.current.filter((audio)=>audio.ended === false);
+        activeAudio.forEach((audio)=>stopSound(audio));
+        } else {
+            return null;
+        }
+        return () => {activeAudio = []}
+
+    }, [state.isPowerOn]);
+
     function handleAudioClick(e) {
     
         function clickAudio(refIndex){
             dispatch({type: ACTIONS.IS_PLAYING});
             console.log(state.isPlaying);
             audioRef.current[refIndex].play();
+            
             //on another click
             if (!audioRef.current[refIndex].paused) { 
               audioRef.current[refIndex].currentTime = 0;
                audioRef.current[refIndex].play(); 
+               
                 }
             }
     const clickedSound = e.target.children[0].attributes[0].nodeValue;
@@ -77,39 +113,14 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
         default:
         return null;
     }
-        /*if(clickedSound === audioRef.current[i].src){
-            audioRef.current[i].volume = state.currentVolume;
-            //audioRef.current[i].volume = state.currentVolume;
-            //console.log("audioRef volume: " + audioRef.current[i].volume);
-            //console.log("state volume: " + state.currentVolume);
-            //console.log("currentVolume value: " + [...state].currentVolume);
-            //console.log("volume: "+ audioRef.current[i].volume);
-            //dispatch({type: ACTIONS.IS_PLAYING});
-            audioRef.current[i].play();
-            //audioRef.current[i].play();
-            //dispatch({type: ACTIONS.IS_NOT_PLAYING});
-            
-
-            /*else if (audioRef.current[i].paused) {
-                dispatch({type: ACTIONS.IS_NOT_PLAYING})
-            }*/
-
-            /*if(state.isPowerOn === false){
-                audioRef.current[i].pause();
-                //audioRef.current[i].pause();
-                audioRef.current[i].currentTime = 0;
-                //audioRef.current[i].currentTime = 0;
-                //dispatch({type: ACTIONS.IS_NOT_PLAYING});
-            }*/
-        //}
         
-    //dispatch({type: ACTIONS.CLICK_PAD});
 }
 
 
 function handleAudioKeyDown(e) {
     
     function audioTap(refIndex){
+    
         buttonRef.current[refIndex].style.backgroundColor = "rgb(0, 230, 0)";
         audioRef.current[refIndex].play();
             //on another tap of same key
@@ -119,8 +130,7 @@ function handleAudioKeyDown(e) {
                 }
         }
 
-        /*may need to do useCallback or useEffect since it only knows on the first render if the power is on and doesn't update when power is toggled*/
-    //if(state.isPowerOn === true) {
+
         if(keyEventCodeRegex.test(e.code)){
             
             switch(e.code){
@@ -167,34 +177,8 @@ function handleAudioKeyDown(e) {
                 return null;
             }
             
-            /*IDEA:*///audioRef.current.filter(sound => console.log(sound.ended);
-     
-    /*} else if(state.isPowerOn === false){
-        return null;
-                }*/
     }
             
-            /*else if(!useAudioRef.current[i].paused && !state.isPowerOn){
-                audioRef.current[i].pause();
-                audioRef.current[i].currentTime = 0;
-            }*/
-
-            //audioRef.current[i].play();
-            //console.log(currentButton);
-            //return currentButton;
-            //break from loop:
-            //buttonRef.current[buttonIndex].style.backgroundColor = 'gray';
-            //setButtonIndex([]);
-        //i = state.drumKitData.buttonList.length;
-        /*} else if (e.keyCode !== state.drumKitData.buttonList[i].keyCode){
-            i++;
-        }*/
-        //i = drumKitData.buttonList.length;
-    
-
-    
-/*, [/*audioRef, buttonRef, dispatch, drumKitData.buttonList, /*state.buttonRefIndex, *//*state.isPowerOn]);*/
-/*are all the above dependencies necessary? Only the last two seem crucial because the others shouldn't change. Make sure they don't. (unless you add useEffect for drumKitData*/
 
 useEffect(() => {
     if(state.isPowerOn===true){
@@ -241,7 +225,7 @@ function makeButtonGray(e){
             return null;
             }
         }
-        /*IDEA:*///audioRef.current.filter(sound => console.log(sound.ended));
+
 
     else {
         return null;
@@ -259,7 +243,7 @@ return(
 
 <div id="button-container">
     {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={/*(dpad)=> buttonRef.current.push(dpad)*/dpad => buttonRef.current[index] = dpad} onClick={state.isPowerOn ? handleAudioClick: null} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
-        <audio ref={/*(ele) => audioRef.current.push(ele)*/ele => audioRef.current[index] = ele} src={btn.url} preload />
+        <audio ref={/*(ele) => audioRef.current.push(ele)*/ele => audioRef.current[index] = ele} src={btn.url} preload="true" />
     </button>)}
 </div>
 )

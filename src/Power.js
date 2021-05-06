@@ -3,8 +3,7 @@ import './Power.css';
 /*import { library } from '@fortawesome/fontawesome-svg-core';*/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
-//import { usePower, usePowerToggle } from './PowerButtonContext.js';
-import { ACTIONS, DispatchContext, GlobalStateContext } from './MasterContext';
+import { ACTIONS, DispatchContext, GlobalStateContext} from './MasterContext';
 
 
 
@@ -13,7 +12,6 @@ export default function Power(){
 
   const state = useContext(GlobalStateContext);
   const dispatch = useContext(DispatchContext);
-
 
 function switchPower(){
   dispatch({type: ACTIONS.TOGGLE_POWER});

@@ -7,11 +7,7 @@ export const ACTIONS = {
     TOGGLE_POWER: "togglePower",
     CHANGE_VOLUME: "changeVolume",
     TOGGLE_BANK: "toggleBank",
-    TAP_KEY: "tapKey",
-    CLICK_PAD: "clickPad",
-    //UPDATE_ACTIVE_AUDIO: "updateActiveAudio"
-    IS_PLAYING: "isPlaying",
-    //IS_NOT_PLAYING: "isNotPlaying",
+    TAP_KEY: "tapKey"
 }
 
 //custom hooks to export refs to Buttons & other components
@@ -25,6 +21,8 @@ export function useButtonRef(){
     return useRef([]);
 
 }
+
+
 //maybe erase keyCodes from objects if they're not being used anywhere
 
 export default function MasterProvider( { children } ){
