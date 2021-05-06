@@ -3,13 +3,6 @@ import React, { useRef, useReducer } from 'react';
 export const GlobalStateContext = React.createContext();
 export const DispatchContext = React.createContext();
 
-export const ACTIONS = {
-    TOGGLE_POWER: "togglePower",
-    CHANGE_VOLUME: "changeVolume",
-    TOGGLE_BANK: "toggleBank",
-    TAP_KEY: "tapKey"
-}
-
 //custom hooks to export refs to Buttons & other components
 
 export function useAudioRef(){
@@ -23,6 +16,13 @@ export function useButtonRef(){
 }
 
 
+export const ACTIONS = {
+    TOGGLE_POWER: "togglePower",
+    CHANGE_VOLUME: "changeVolume",
+    TOGGLE_BANK: "toggleBank"
+}
+
+//for display, maybe create a global displayText item in state in reducer function, and dispatch on keydown & on audioClick
 //maybe erase keyCodes from objects if they're not being used anywhere
 
 export default function MasterProvider( { children } ){
@@ -31,10 +31,8 @@ export default function MasterProvider( { children } ){
 
     const kit2 = {displayText: "Smooth Piano Kit", buttonList: [{letter: "Q", keyCode: 81, url: "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3"}, {letter: "W", keyCode: 87, url: "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3"}, {letter: "E", keyCode: 69, url:"https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3"}, {letter: "A", keyCode: 65, url: "https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3"}, {letter: "S", keyCode: 83, url: "https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3"}, {letter: "D", keyCode: 68, url: "https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3"}, {letter: "Z", keyCode: 90, url: "https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3"}, {letter: "X", keyCode: 88, url: "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3"}, {letter: "C", keyCode: 67, url: "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"}]};
 
-/*syntax: const [state,dispatch] = useReducer(reducerFunction, initialStateValue)*/
-//const indices = [];
 
-const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, isPlaying: false, /*timesPlayed: 0,*/ drumKitData: kit1 /*currentlyPlayingAudio: ""*/});
+const [state, dispatch] = useReducer(reducer, {isPowerOn: true, currentVolume: 0.5, kitOneIsActive: true, isPlaying: false, drumKitData: kit1});
 
 
 function reducer(state, action){
@@ -49,25 +47,6 @@ function reducer(state, action){
         
         case ACTIONS.TOGGLE_BANK:
         return {...state, kitOneIsActive: !state.kitOneIsActive, drumKitData: state.kitOneIsActive === true ? kit2 : kit1}
-
-        /*case ACTIONS.UPDATE_ACTIVE_AUDIO:
-        return {...state, currentlyPlayingAudio: action.payload}*/
-        
-        /*case ACTIONS.TAP_KEY:
-        return {...state, isPlaying: false}*///should set isPlaying to false AFTER playing is complete.
-        
-        //case ACTIONS.CLICK_PAD:
-        //handleAudioClick(action.payload);
-        //return {...state/*, isPlaying: false*/}/*should set isPlaying to false AFTER playing is complete. Does this cause the promise to be interrupted?*/
-        
-        case ACTIONS.IS_PLAYING:
-            return {...state, isPlaying: true}
-        
-        /*case ACTIONS.IS_NOT_PLAYING:
-            return {...state, isPlaying: false}*/
-            
-            //return {...state, buttonRefIndex: []}
-
 
         default:
         return state;

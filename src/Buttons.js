@@ -41,27 +41,36 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
     return e.target.style.backgroundColor = "gray";
     }
 
-    //will make the sound shut off if power shuts off
+     
+    //Will make the sound stop if power is switched off
     useEffect(()=>{
+        var activeAudio = audioRef.current.filter((audio)=>audio.ended === false);
+
         if (state.isPowerOn === false){
             function stopSound(audio){
                 audio.pause();
                 audio.currentTime = 0;
             }
-            var activeAudio = audioRef.current.filter((audio)=>audio.ended === false);
         activeAudio.forEach((audio)=>stopSound(audio));
         } else {
             return null;
         }
-        return () => {activeAudio = []}
+        //any cleanup necessary? Probably not
 
     }, [state.isPowerOn]);
+
+    //Will change volume dynamically as sound plays, & not just before playback
+    useEffect(()=>{
+        audioRef.current.forEach((audio)=>audio.volume = state.currentVolume);
+        //any cleanup necessary? Probably not
+
+    }, [state.currentVolume])
+
 
     function handleAudioClick(e) {
     
         function clickAudio(refIndex){
             dispatch({type: ACTIONS.IS_PLAYING});
-            console.log(state.isPlaying);
             audioRef.current[refIndex].play();
             
             //on another click
