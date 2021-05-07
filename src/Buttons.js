@@ -184,7 +184,7 @@ useEffect(() => {
     }
     return ()=> {window.removeEventListener('keydown', handleAudioKeyDown)};
 
-}, [state.isPowerOn]);
+}, [state.isPowerOn, state.kitOneIsActive, state.drumKitData]);
 
 function makeButtonGray(e){
         if(keyEventCodeRegex.test(e.code)){
