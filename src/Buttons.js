@@ -1,8 +1,8 @@
 import React, { useEffect, useContext} from 'react';
 import './Buttons.css';
-import { ACTIONS, DispatchContext, GlobalStateContext, useAudioRef, useButtonRef } from './MasterContext.js';
+import { ACTIONS, DispatchContext, GlobalStateContext, useAudioRef, useButtonRef } from './MasterContext';
 
-/*sfind way to export audioRef.current from here to volume & power, or to have it sent here and everywhere else from MasterContext*/
+
 
 
 function Buttons(){
@@ -115,7 +115,7 @@ function handleAudioKeyDown(e) {
     
     function audioTap(refIndex){
     
-        dispatch({type: ACTIONS.CHANGE_DISPLAY, payload: state.drumKitData.buttonList[refIndex].displayText})
+        dispatch({type: ACTIONS.CHANGE_DISPLAY, payload: state.drumKitData.buttonList[refIndex].displayText});
         buttonRef.current[refIndex].style.backgroundColor = "rgb(0, 230, 0)";
         audioRef.current[refIndex].play();
             //on another tap of same key
@@ -237,8 +237,8 @@ useEffect(() => {
 return(
 
 <div id="button-container">
-    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={/*(dpad)=> buttonRef.current.push(dpad)*/dpad => buttonRef.current[index] = dpad} onClick={state.isPowerOn ? handleAudioClick: null} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
-        <audio ref={/*(ele) => audioRef.current.push(ele)*/ele => audioRef.current[index] = ele} src={btn.url} preload="true" />
+    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={dpad => buttonRef.current[index] = dpad} onClick={state.isPowerOn ? handleAudioClick: null} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
+        <audio ref={ele => audioRef.current[index] = ele} src={btn.url} preload="true" />
     </button>)}
 </div>
 );

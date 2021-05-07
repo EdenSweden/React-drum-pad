@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import './Volume.css';
-import { ACTIONS, DispatchContext, GlobalStateContext } from './MasterContext';
+import { ACTIONS, DispatchContext } from './MasterContext';
 
 
 
 
 export default function Volume(){
 
-  const state = useContext(GlobalStateContext);
   const dispatch = useContext(DispatchContext);
 
 

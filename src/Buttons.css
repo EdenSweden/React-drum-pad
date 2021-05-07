@@ -7,10 +7,6 @@
     font-weight: bold;
     cursor: pointer;
   }
-  /*.drum-pad:hover {
-    background-color: #00e600;
-    outline: none;
-  }*/
   
   .drum-pad:focus {
     background-color: #00e600;
