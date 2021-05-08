@@ -234,10 +234,11 @@ useEffect(() => {
 
 });
 
+
 return(
 
-<div id="button-container">
-    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={dpad => buttonRef.current[index] = dpad} onClick={state.isPowerOn ? handleAudioClick: null} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" id={btn.letter}>{btn.letter}
+<div id="button-container" aria-label="Nine drum pad buttons. Press Q, W, E, A, S, D, Z, X, or C.">
+    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={dpad => buttonRef.current[index] = dpad} aria-label={state.drumKitData.buttonList[index].displayText} onClick={state.isPowerOn ? handleAudioClick: null} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} className="drum-pad" tabIndex={0} id={btn.letter}>{btn.letter}
         <audio ref={ele => audioRef.current[index] = ele} src={btn.url} preload="true" />
     </button>)}
 </div>

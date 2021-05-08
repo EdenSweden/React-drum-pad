@@ -19,8 +19,8 @@ export default function Volume(){
 
     return (
         <div id="volume">
-          <label htmlFor="volume-switch">Volume</label>
-          <input
+          <label htmlFor="volume-switch" id="volume-switch-label">Volume</label>
+          <input aria-labelledby="volume-switch-label"
             id="volume-switch"
             name="volume-switch"
             type="range"

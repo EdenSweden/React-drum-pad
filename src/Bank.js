@@ -10,8 +10,8 @@ const dispatch = useContext(DispatchContext);
 
   return (
     <div id="bank">
-      <div id="bank-switch-holder" onClick={()=>dispatch({type: ACTIONS.TOGGLE_BANK})} tabIndex={0}>
-        <div className={state.kitOneIsActive ? "switched" : null } id="bank-switch"></div>
+      <div id="bank-switch-holder" onClick={()=>dispatch({type: ACTIONS.TOGGLE_BANK})}>
+        <input type="button" aria-label={"Switch drum kits." + state.drumKitData.displayText} className={state.kitOneIsActive ? "switched" : null } id="bank-switch"></input>
       </div>
     </div>
   );
