@@ -42,14 +42,14 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
         }
         //any cleanup necessary? Probably not
 
-    }, [state.isPowerOn]);
+    }, [state.isPowerOn, audioRef]);
 
     //Will change volume dynamically as sound plays, & not just before playback
     useEffect(()=>{
         audioRef.current.forEach((audio)=>audio.volume = state.currentVolume);
         //any cleanup necessary? Probably not
 
-    }, [state.currentVolume])
+    }, [state.currentVolume, audioRef])
 
 
     function handleAudioClick(e) {
@@ -109,8 +109,6 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
     }
         
 }
-
-
 function handleAudioKeyDown(e) {
     
     function audioTap(refIndex){
@@ -173,7 +171,8 @@ function handleAudioKeyDown(e) {
             }
             
     }
-            
+
+
 
 useEffect(() => {
     if(state.isPowerOn===true){
@@ -183,7 +182,8 @@ useEffect(() => {
         window.removeEventListener('keydown', handleAudioKeyDown);
     }
     return ()=> {window.removeEventListener('keydown', handleAudioKeyDown)};
-
+/*all dependencies of this effect are the same state values used in the handleAudioKeyDown function above*/
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [state.isPowerOn, state.kitOneIsActive, state.drumKitData]);
 
 function makeButtonGray(e){
@@ -238,7 +238,7 @@ useEffect(() => {
 return(
 
 <div id="button-container" aria-label="Nine drum pad buttons. Press Q, W, E, A, S, D, Z, X, or C.">
-    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={dpad => buttonRef.current[index] = dpad} aria-label={state.drumKitData.buttonList[index].displayText} onClick={state.isPowerOn ? handleAudioClick: null} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} onFocus={buttonHover} onBlur={buttonExit} className="drum-pad" tabIndex={0} id={btn.letter}>{btn.letter}
+    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={dpad => buttonRef.current[index] = dpad} aria-label={state.isPowerOn ? state.drumKitData.buttonList[index].displayText + ", or press " + "'" + btn.letter + ".'" : state.drumKitData.buttonList[index].displayText + ". Power is off"} onClick={state.isPowerOn ? handleAudioClick: null} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} onFocus={buttonHover} onBlur={buttonExit} className="drum-pad" tabIndex={0} id={btn.letter}>{btn.letter}
         <audio ref={ele => audioRef.current[index] = ele} src={btn.url} preload="true" />
     </button>)}
 </div>
