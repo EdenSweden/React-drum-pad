@@ -7,15 +7,7 @@
   float: right;
   cursor: pointer;
 }
-/*[id="power-button"] button {
-  color: white;
-  border: 2px solid black;
-    
-  }*/
-  /*#power-button:hover{
-    color: #0099ff;
-    border: 2px solid gray;
-  }*/
+
 
   button.power-on {
     color: #0099ff;
@@ -26,3 +18,13 @@
     border: 2px solid black;
     
   }
+
+  /*@media only screen and (max-width: 750px){
+
+      #power-button{
+        padding: 6px;
+        font-size: 21px;
+      }
+
+
+  }*/

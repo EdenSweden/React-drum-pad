@@ -12,18 +12,26 @@
     
   }
 
-  @media only screen and (max-width: 780px){
+  @media only screen and (max-width: 750px){
 
     #drum-machine{
-
-      height: 300px;
-      width: 162px;
-      margin: 0 auto;
-      top: 10px;
+      
+      top: 0;
+      bottom: 0;
+      height: 700px;
+      width: 400px;
+      /*transform: scale(0.85);*/
       display: grid;
-      grid-template-rows: 1fr 1fr;
       grid-template-columns: 1fr;
-
+      grid-template-rows: 1fr 1fr;
     }
 
+  }
+
+  @media only screen and (max-width: 400px){
+
+    #drum-machine{
+      width: 100%;
+
+    }
   }

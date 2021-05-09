@@ -13,6 +13,7 @@
   }
   
   #bank-switch{
+    cursor: pointer;
     display: block;
     background-color: red;
     height: 100%;

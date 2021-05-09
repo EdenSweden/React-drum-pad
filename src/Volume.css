@@ -11,3 +11,14 @@
 
 
   /*what is media-volume-sliderthumb?*/
+  /*@media only screen and (max-width: 750px){
+
+    #volume{
+      padding: 3px;
+    }
+
+    #volume-switch-label{
+      font-size: 17px;
+    }
+
+  }*/
