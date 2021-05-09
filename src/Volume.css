@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
+
 #volume {
     padding: 15px;
   }
+
+  #volume-switch-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+  }
+
+
+  /*what is media-volume-sliderthumb?*/

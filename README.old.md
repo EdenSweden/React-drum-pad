@@ -8,4 +8,4 @@ Personal note for changes needed:
 2. Make adjustments for mobile responsiveness
 3. Ignore eslint for certain useEffect hooks?
 4. Make any needed adjustments to pass freeCodeCamp tests
-5. Finishing touches. Make volume range look prettier?
+5. Finishing touches. Make volume range and display look prettier

@@ -11,7 +11,7 @@ const dispatch = useContext(DispatchContext);
   return (
     <div id="bank">
       <div id="bank-switch-holder" onClick={()=>dispatch({type: ACTIONS.TOGGLE_BANK})}>
-        <input type="button" aria-label={"Switch drum kits." + state.drumKitData.displayText} className={state.kitOneIsActive ? "switched" : null } id="bank-switch"></input>
+        <input title="switch sound bank" type="button" aria-label={state.drumKitData.displayText +" is active. "  + "Switch sound bank."} className={state.kitOneIsActive ? "switched" : null } id="bank-switch"></input>
       </div>
     </div>
   );

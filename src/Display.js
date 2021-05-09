@@ -12,8 +12,8 @@ const state = useContext(GlobalStateContext);
 
 
 return ( 
-    <div id="display">
-      <p tabIndex={0} aria-label={state.isPowerOn ? "Display screen: " + state.displayText : "Empty display screen"}>{state.isPowerOn ? state.displayText : ""}</p>
+    <div id="display"tabIndex={0} aria-label={state.isPowerOn ? "Display screen says: " + state.displayText +".": "Empty display screen."}>
+      <p>{state.isPowerOn ? state.displayText : " "}</p>
     </div>
   );
 }
