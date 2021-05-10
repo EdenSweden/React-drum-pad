@@ -2,9 +2,9 @@
     height: 260px;
     width: 280px;
     background-color: darkGray;
-    position: relative;
+    /*position: relative;
     top: 55px;
-    margin: 0 auto;
+    margin: 0 auto;*/
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-gap: 7px;
@@ -18,10 +18,11 @@
 
     #controls{
 
-        margin: 0 auto;
-        top: 0;
+        /*margin: 0 auto;*/
+        /*top: 0;*/
         grid-gap: 0;
-        transform: scale(0.9);
+        /*transform: scale(0.9);*/
+        margin-bottom: 10%;
 
 
     }

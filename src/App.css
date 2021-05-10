@@ -19,6 +19,9 @@
 }*/
 body{
   background-color: lightGray;
+  box-sizing: border-box;
+  /*display: grid;*/
+
   
 }
 

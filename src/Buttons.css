@@ -15,9 +15,9 @@
 
   #button-container {
     background-color: darkGray;
-    position: relative;
+    /*position: relative;
     top: 55px;
-    left: 50px;
+    left: 50px;*/
     width: 280px;
     height: 280px;
     display: grid;
@@ -32,11 +32,12 @@
     #button-container {
       top: 0;
       left: 0;
-      margin: 14px auto 0 auto;
-      transform: scale(0.9);
-      /*top: 10%;
-        margin: 0 auto;
-        left: 0;
+      /*margin: 14px auto 0 auto;*/
+      /*transform: scale(0.9);*/
+      /*top: 10%;*/
+        /*margin: 0 auto;*/
+        margin-top: 10%;
+        /*left: 0;
         width: 80%;
         height: 80%;*/
 
