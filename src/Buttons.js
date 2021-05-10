@@ -16,8 +16,11 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
 
 
     function buttonHover(e){
-    
+        if(state.isPowerOn){
     return e.target.style.backgroundColor = "rgb(0, 230, 0)";
+        } else{
+            return null;
+        }
     
     }
     
