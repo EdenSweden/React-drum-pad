@@ -38,7 +38,7 @@ function reducer(state, action){
     switch(action.type) {
 
         case ACTIONS.TOGGLE_POWER:
-        return {...state, isPowerOn: !state.isPowerOn/*, isPlaying: false*/}
+        return {...state, isPowerOn: !state.isPowerOn}
         
         case ACTIONS.CHANGE_VOLUME:
         return {...state, currentVolume: action.payload}

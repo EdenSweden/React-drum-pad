@@ -13,11 +13,7 @@
   @media only screen and (max-width: 750px)  {
 
     #controls{
-
-        grid-gap: 0;
         margin-bottom: 10%;
-
-
     }
 
   }
