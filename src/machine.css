@@ -4,7 +4,7 @@
     height: 400px;
     width: 740px;
     position: relative;
-    top: 4em;
+    top: 0;
     bottom: 4em;
     border: 6px solid #00e600;
     display: flex;
@@ -23,7 +23,7 @@
       min-height: auto;
       height: 700px;
       width: 400px;
-      transform: scale(0.8);
+      transform: scale(0.7);
       flex-direction: column;
       align-items: center;
       justify-content: space-between;

@@ -14,10 +14,44 @@ const audioRef = useAudioRef();
 const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
 
 
-
     function buttonHover(e){
         if(state.isPowerOn){
-    return e.target.style.backgroundColor = "rgb(0, 230, 0)";
+            function showInstrument(index){
+                dispatch({type: ACTIONS.CHANGE_DISPLAY, payload: state.drumKitData.buttonList[index].displayText});
+            }
+            switch(e.target.id){   
+                case "Q":
+                showInstrument(0);
+                break;
+                case "W":
+                showInstrument(1);
+                break;
+                case "E":
+                showInstrument(2);
+                break;
+                case "A":
+                showInstrument(3);
+                break;
+                case "S":
+                showInstrument(4);
+                break;
+                case "D":
+                showInstrument(5);
+                break;
+                case "Z":
+                showInstrument(6);
+                break;
+                case "X":
+                showInstrument(7);
+                break;
+                case "C":
+                showInstrument(8);
+                break;
+                default:
+                break;
+                
+            }
+        return e.target.style.backgroundColor = "rgb(0, 230, 0)";
         } else{
             return null;
         }
@@ -25,7 +59,8 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
     }
     
     function buttonExit(e){
-    
+
+        dispatch({type: ACTIONS.CHANGE_DISPLAY, payload: state.drumKitData.displayText});
     return e.target.style.backgroundColor = "gray";
     }
 

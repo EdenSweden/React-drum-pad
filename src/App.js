@@ -10,6 +10,7 @@ function App() {
   return (
     <MasterProvider>
     <div className="App">
+      <h1>Drum Pad</h1>
       <Machine />
     </div>
     </MasterProvider> 
