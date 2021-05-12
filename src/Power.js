@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import './Power.css';
-/*import { library } from '@fortawesome/fontawesome-svg-core';*/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { ACTIONS, DispatchContext, GlobalStateContext} from './MasterContext';

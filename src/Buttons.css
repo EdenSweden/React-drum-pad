@@ -35,4 +35,12 @@
 
 
   }
+
+  @media only screen and (max-width: 280px){
+
+  #button-container{
+    margin: 15px;
+  }
+
+}
   
