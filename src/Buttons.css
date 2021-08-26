@@ -1,11 +1,18 @@
 
 .drum-pad {
-    border-radius: 15px;
-    font-size: 28px;
-    background-color: gray;
-    font-family: Courier New;
-    font-weight: bold;
-    cursor: pointer;
+  box-sizing: content-box;
+  border-radius: 15px;
+  font-size: 28px;
+  background-color: gray;
+  font-family: Courier New;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: solid 3px #505050;
+  border-right: solid 3px #404040;
+}
+
+.drum-pad:active {
+  border: solid 1px black;
   }
   
   /*.drum-pad:focus {

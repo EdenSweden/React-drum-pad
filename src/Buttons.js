@@ -91,6 +91,8 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
 
 
     function handleAudioClick(e) {
+
+        e.target.style.border="solid 1px black";
     
         function clickAudio(refIndex){
             dispatch({type: ACTIONS.CHANGE_DISPLAY, payload: state.drumKitData.buttonList[refIndex].displayText})
@@ -100,67 +102,94 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
             if (!audioRef.current[refIndex].paused) { 
               audioRef.current[refIndex].currentTime = 0;
                audioRef.current[refIndex].play(); 
-               
                 }
             }
-    const clickedSound = e.target.children[0].attributes[0].nodeValue;
+
+        if(state.isPowerOn){
+            const clickedSound = e.target.children[0].attributes[0].nodeValue;
     
-    switch(clickedSound){
-        case audioRef.current[0].src:
-        clickAudio(0);
-        break;
+        switch(clickedSound){
+            case audioRef.current[0].src:
+            clickAudio(0);
+            break;
 
-        case audioRef.current[1].src:
-        clickAudio(1);
-        break;
+            case audioRef.current[1].src:
+            clickAudio(1);
+            break;
 
-        case audioRef.current[2].src:
-        clickAudio(2);
-        break;
+            case audioRef.current[2].src:
+            clickAudio(2);
+            break;
 
-        case audioRef.current[3].src:
-        clickAudio(3);
-        break;
+            case audioRef.current[3].src:
+            clickAudio(3);
+            break;
 
-        case audioRef.current[4].src:
-        clickAudio(4);
-        break;
+            case audioRef.current[4].src:
+            clickAudio(4);
+            break;
 
-        case audioRef.current[5].src:
-        clickAudio(5);
-        break;
+            case audioRef.current[5].src:
+            clickAudio(5);
+            break;
 
-        case audioRef.current[6].src:
-        clickAudio(6);
-        break;
+            case audioRef.current[6].src:
+            clickAudio(6);
+            break;
 
-        case audioRef.current[7].src:
-        clickAudio(7);
-        break;
+            case audioRef.current[7].src:
+            clickAudio(7);
+            break;
 
-        case audioRef.current[8].src:
-        clickAudio(8);
-        break;
+            case audioRef.current[8].src:
+            clickAudio(8);
+            break;
 
-        default:
-        return null;
+            default:
+            return null;
+            }
+        } else {
+            console.log("power is off.");
+        }    
     }
-        
-}
-function handleAudioKeyDown(e) {
-    
-    function audioTap(refIndex){
-    
-        dispatch({type: ACTIONS.CHANGE_DISPLAY, payload: state.drumKitData.buttonList[refIndex].displayText});
-        buttonRef.current[refIndex].style.backgroundColor = "rgb(0, 230, 0)";
-        audioRef.current[refIndex].play();
-            //on another tap of same key
-            if(!audioRef.current[refIndex].paused){
-                audioRef.current[refIndex].currentTime = 0;
-                audioRef.current[refIndex].play();
-                }
-        }
 
+    const mouseUpReturnStyles = (index) => {
+       
+      let buttonStyle = buttonRef.current[index].style;
+      buttonStyle.borderBottom = "solid 3px #505050";
+      buttonStyle.borderRight = "solid 3px #404040";
+      buttonStyle.borderTop = "solid 3px rgb(227, 227, 227)";
+      buttonStyle.borderLeft = "solid 3px rgb(227, 227, 227)";
+      }
+
+      //CHANGED HERE:
+
+function handleAudioKeyDown(e) {
+
+        function audioTap(refIndex) {
+            if(state.isPowerOn===true){
+            dispatch({
+              type: ACTIONS.CHANGE_DISPLAY,
+              payload: state.drumKitData.buttonList[refIndex].displayText
+            });
+            buttonRef.current[refIndex].style.backgroundColor = "rgb(0, 230, 0)";
+            buttonRef.current[refIndex].style.border = "solid 1px black";
+            audioRef.current[refIndex].play();
+            //on another tap of same key:
+            if (!audioRef.current[refIndex].paused && audioRef.current[refIndex].currentTime > 0) {
+           console.log("tapped again"); 
+            audioRef.current[refIndex].pause();       
+            audioRef.current[refIndex].currentTime = 0;
+            audioRef.current[refIndex].play();
+            }
+          } else if (state.isPowerOn===false){
+            buttonRef.current[refIndex].style.border = "solid 1px black";
+            } else {
+                return null;
+            } 
+            
+
+        }
 
         if(keyEventCodeRegex.test(e.code)){
             
@@ -207,59 +236,69 @@ function handleAudioKeyDown(e) {
             } else {
                 return null;
             }
-            
-    }
+}
 
 
-
+//CHANGED HERE:
 useEffect(() => {
-    if(state.isPowerOn===true){
+    //if(state.isPowerOn===true){
     window.addEventListener('keydown', handleAudioKeyDown);
     
-    } else if(state.isPowerOn===false){
+    /*} else if(state.isPowerOn===false){
         window.removeEventListener('keydown', handleAudioKeyDown);
-    }
+    }*/
     return ()=> {window.removeEventListener('keydown', handleAudioKeyDown)};
 /*all dependencies of this effect are the same state values used in the handleAudioKeyDown function above*/
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [state.isPowerOn, state.kitOneIsActive, state.drumKitData]);
 
 function makeButtonGray(e){
+
+    const returnStyles = (btnIndex) => {
+        let buttonStyle = buttonRef.current[btnIndex].style;
+  
+        buttonStyle.backgroundColor = "gray";
+        buttonStyle.borderBottom = "solid 3px #505050";
+        buttonStyle.borderRight = "solid 3px #404040";
+        buttonStyle.borderTop = "solid 3px rgb(227, 227, 227)";
+        buttonStyle.borderLeft = "solid 3px rgb(227, 227, 227)";
+      };
+
         if(keyEventCodeRegex.test(e.code)){
         switch(e.code){
             case "KeyQ":
-            buttonRef.current[0].style.backgroundColor = "gray";
-            break;
-            case "KeyW":
-            buttonRef.current[1].style.backgroundColor = "gray";
-            break;
-            case "KeyE":
-            buttonRef.current[2].style.backgroundColor = "gray";
-            break;
-            case "KeyA":
-            buttonRef.current[3].style.backgroundColor = "gray";
-            break;
-            case "KeyS":
-            buttonRef.current[4].style.backgroundColor = "gray";
-            break;
-            case "KeyD":
-            buttonRef.current[5].style.backgroundColor = "gray";
-            break;
-            case "KeyZ":
-            buttonRef.current[6].style.backgroundColor = "gray";
-            break;
-            case "KeyX":
-            buttonRef.current[7].style.backgroundColor = "gray";
-            break;
-            case "KeyC":
-            buttonRef.current[8].style.backgroundColor = "gray";
-            break;
-            default:
-            return null;
+          returnStyles(0);
+          break;
+        case "KeyW":
+          returnStyles(1);
+          break;
+        case "KeyE":
+          returnStyles(
+            2
+          );
+          break;
+        case "KeyA":
+          returnStyles(3);
+          break;
+        case "KeyS":
+          returnStyles(4);
+          break;
+        case "KeyD":
+          returnStyles(5);
+          break;
+        case "KeyZ":
+          returnStyles(6);
+          break;
+        case "KeyX":
+          returnStyles(7);
+          break;
+        case "KeyC":
+          returnStyles(8);
+          break;
+        default:
+          return null;
             }
         }
-
-
     else {
         return null;
     }
@@ -276,7 +315,7 @@ useEffect(() => {
 return(
 
 <div id="button-container" aria-label="Nine drum pad buttons. Press Q, W, E, A, S, D, Z, X, or C.">
-    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={dpad => buttonRef.current[index] = dpad} aria-label={state.isPowerOn ? state.drumKitData.buttonList[index].displayText + ", or press '" + btn.letter + ".'" : state.drumKitData.buttonList[index].displayText + ". Power is off"} onClick={state.isPowerOn ? handleAudioClick: null} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseOut={buttonExit} onFocus={buttonHover} onBlur={buttonExit} className="drum-pad" tabIndex={0} id={btn.letter}>{btn.letter}
+    {state.drumKitData.buttonList.map((btn, index) => <button key={btn.letter} ref={dpad => buttonRef.current[index] = dpad} aria-label={state.isPowerOn ? state.drumKitData.buttonList[index].displayText + ", or press '" + btn.letter + ".'" : state.drumKitData.buttonList[index].displayText + ". Power is off"} onMouseDown={handleAudioClick} onMouseOver={state.isPowerOn ? buttonHover : null} onMouseUp={()=>mouseUpReturnStyles(index)} onMouseOut={buttonExit} onFocus={buttonHover} onBlur={buttonExit} className="drum-pad" tabIndex={0} id={btn.letter}>{btn.letter}
         <audio ref={ele => audioRef.current[index] = ele} src={btn.url} preload="true" />
     </button>)}
 </div>
