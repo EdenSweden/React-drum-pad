@@ -65,7 +65,7 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
     }
 
      
-    //Will make the sound stop if power is switched off
+    //Will make the sound stop if power is switched off during playback
     useEffect(()=>{
         var activeAudio = audioRef.current.filter((audio)=>audio.ended === false);
 
@@ -78,14 +78,12 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
         } else {
             return null;
         }
-        //any cleanup necessary? Probably not
 
     }, [state.isPowerOn, audioRef]);
 
     //Will change volume dynamically as sound plays, & not just before playback
     useEffect(()=>{
         audioRef.current.forEach((audio)=>audio.volume = state.currentVolume);
-        //any cleanup necessary? Probably not
 
     }, [state.currentVolume, audioRef])
 
@@ -162,7 +160,7 @@ const keyEventCodeRegex = /^(Key)[Q|W|E|A|S|D|Z|X|C]/;
       buttonStyle.borderLeft = "solid 3px rgb(227, 227, 227)";
       }
 
-      //CHANGED HERE:
+      
 
 function handleAudioKeyDown(e) {
 
@@ -177,7 +175,7 @@ function handleAudioKeyDown(e) {
             audioRef.current[refIndex].play();
             //on another tap of same key:
             if (!audioRef.current[refIndex].paused && audioRef.current[refIndex].currentTime > 0) {
-           console.log("tapped again"); 
+           
             audioRef.current[refIndex].pause();       
             audioRef.current[refIndex].currentTime = 0;
             audioRef.current[refIndex].play();
@@ -239,14 +237,10 @@ function handleAudioKeyDown(e) {
 }
 
 
-//CHANGED HERE:
 useEffect(() => {
-    //if(state.isPowerOn===true){
+   
     window.addEventListener('keydown', handleAudioKeyDown);
-    
-    /*} else if(state.isPowerOn===false){
-        window.removeEventListener('keydown', handleAudioKeyDown);
-    }*/
+
     return ()=> {window.removeEventListener('keydown', handleAudioKeyDown)};
 /*all dependencies of this effect are the same state values used in the handleAudioKeyDown function above*/
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -266,7 +260,7 @@ function makeButtonGray(e){
 
         if(keyEventCodeRegex.test(e.code)){
         switch(e.code){
-            case "KeyQ":
+        case "KeyQ":
           returnStyles(0);
           break;
         case "KeyW":
