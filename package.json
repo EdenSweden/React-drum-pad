@@ -2,7 +2,7 @@
   "name": "react-drum-pad",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://EdenSweden.github.io/react-drum-pad/",
+  "homepage": "http://edensweden.github.io/react-drum-pad/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
