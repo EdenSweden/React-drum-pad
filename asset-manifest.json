@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-drum-pad/static/css/main.327bdddf.chunk.css",
+    "main.js": "/react-drum-pad/static/js/main.cf2a31a7.chunk.js",
+    "main.js.map": "/react-drum-pad/static/js/main.cf2a31a7.chunk.js.map",
+    "runtime-main.js": "/react-drum-pad/static/js/runtime-main.47f4a214.js",
+    "runtime-main.js.map": "/react-drum-pad/static/js/runtime-main.47f4a214.js.map",
+    "static/js/2.79a903df.chunk.js": "/react-drum-pad/static/js/2.79a903df.chunk.js",
+    "static/js/2.79a903df.chunk.js.map": "/react-drum-pad/static/js/2.79a903df.chunk.js.map",
+    "static/js/3.04213582.chunk.js": "/react-drum-pad/static/js/3.04213582.chunk.js",
+    "static/js/3.04213582.chunk.js.map": "/react-drum-pad/static/js/3.04213582.chunk.js.map",
+    "index.html": "/react-drum-pad/index.html",
+    "static/css/main.327bdddf.chunk.css.map": "/react-drum-pad/static/css/main.327bdddf.chunk.css.map",
+    "static/js/2.79a903df.chunk.js.LICENSE.txt": "/react-drum-pad/static/js/2.79a903df.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.47f4a214.js",
+    "static/js/2.79a903df.chunk.js",
+    "static/css/main.327bdddf.chunk.css",
+    "static/js/main.cf2a31a7.chunk.js"
+  ]
+}
